@@ -31,22 +31,21 @@
   <meta name="msapplication-tap-highlight" content="no">
   <title>Login</title>
 
+   <!-- Favicons-->
+  <link rel="icon" href="<?=base_url('assets/images/favicon/sti.png')?>" sizes="32x32">
   <!-- Favicons-->
-  <link rel="icon" href="<?=base_url()?>assets/images/favicon/favicon-32x32.png" sizes="32x32">
-  <!-- Favicons-->
-  <link rel="apple-touch-icon-precomposed" href="<?=base_url()?>assets/images/favicon/apple-touch-icon-152x152.png">
 
-  <link href="<?=base_url()?>assets/css/page.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="<?=base_url('assets/css/page.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
 
   <!-- CORE CSS-->
 
-  <link href="<?=base_url()?>assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="<?=base_url()?>assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="<?=base_url()?>assets/css/page-center.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="<?=base_url('assets/css/materialize.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="<?=base_url('assets/css/style.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="<?=base_url('assets/css/page-center.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
 
   <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
-  <link href="<?=base_url()?>assets/css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="<?=base_url()?>assets/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="<?=base_url('assets/css/prism.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="<?=base_url('assets/js/plugins/perfect-scrollbar/perfect-scrollbar.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
   
 </head>
 
@@ -68,7 +67,7 @@
         <div class="row">
           <div class="input-field col s12 center">
             <img src="<?=base_url()?>assets/images/sti_header.png" alt="" class="responsive-img valign">
-            <p class="center login-form-text">Alumni Information System</p>
+            <p class="center login-form-text"><?=$site_title?></p>
           </div>
         </div>
         <div class="row margin center">  
@@ -108,6 +107,8 @@
           </div>
         </div>        
       </form>
+
+      <?php $this->load->view('inc/copy_footer');?>
     </div>
   </div>
 
@@ -116,16 +117,16 @@
     ================================================ -->
 
     <!-- jQuery Library -->
-    <script type="text/javascript" src="<?=base_url()?>assets/js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="<?=base_url('assets/js/jquery-1.11.2.min.js')?>"></script>
     <!--materialize js-->
-    <script type="text/javascript" src="<?=base_url()?>assets/js/materialize.js"></script>
+    <script type="text/javascript" src="<?=base_url('assets/js/materialize.js')?>"></script>
     <!--prism-->
-    <script type="text/javascript" src="<?=base_url()?>assets/js/prism.js"></script>
+    <script type="text/javascript" src="<?=base_url('assets/js/prism.js')?>"></script>
     <!--scrollbar-->
-    <script type="text/javascript" src="<?=base_url()?>assets/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script type="text/javascript" src="<?=base_url('assets/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js')?>"></script>
 
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-    <script type="text/javascript" src="<?=base_url()?>assets/js/plugins.js"></script>
+    <script type="text/javascript" src="<?=base_url('assets/js/plugins.js')?>"></script>
 
 </body>
 </html>

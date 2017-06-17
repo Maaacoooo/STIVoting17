@@ -6,14 +6,14 @@ class Vote extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'Voting page!';
+		$data['title'] = 'Vote now!';
 		$data['site_title'] = APP_NAME;
 		$this->load->view('vote/voting_page', $data);
 	}
 
 	public function success()
 	{
-		$data['title'] = 'Voting page!';
+		$data['title'] = 'Vote Success!';
 		$data['site_title'] = APP_NAME;
 		$this->load->view('vote/vote_success', $data);
 	}

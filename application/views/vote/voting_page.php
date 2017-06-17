@@ -63,7 +63,7 @@
 
         <div class="row">
           <div class="input-field col s12 center">
-            <img src="<?=base_url()?>assets/images/sti_header.png" alt="" class="responsive-img valign">
+            <img src="<?=base_url('assets/images/sti_header.png')?>" alt="" class="responsive-img valign">
             <p class="center login-form-text"><?=$site_title?></p>
           </div>
         </div>
