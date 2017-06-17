@@ -47,7 +47,6 @@
   <link href="<?=base_url('assets/css/prism.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
   <link href="<?=base_url('assets/js/plugins/perfect-scrollbar/perfect-scrollbar.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
   
-  
 </head>
 
 <body class="indigo darken-2">
@@ -60,11 +59,8 @@
   <!-- End Page Loading -->
 
 
+    <div class="col s12 m8 l6 z-depth-4 card-panel login-border vote-container">
 
-  <div id="login-page" class="row">
-    <div class="col s12 z-depth-4 card-panel login-border">
-
-      <?=form_open('verifylogin', array('class' => 'login-form'))?>
         <div class="row">
           <div class="input-field col s12 center">
             <img src="<?=base_url()?>assets/images/sti_header.png" alt="" class="responsive-img valign">
@@ -88,23 +84,42 @@
               </div>               
             <?php } ?>  
         </div>
-        <div class="row margin">
-          <div class="input-field col s12">
-            <i class="mdi-action-verified-user prefix"></i>
-            <input id="username" type="text" name="username" class="validate" autocomplete="off" required>
-            <label for="username" class="center-align">Vote Pass</label>
+        
+        <?php for($x=1;$x<=2;$x++): ?>
+        <div id="input-radio-buttons" class="section card-panel">
+              <h4 class="header">President <?=$x?></h4>
+              <div class="row">
+                <div class="col s12 l12">                 
+                  <ul class="collection">
+                  <?php for($y=1;$y<=3;$y++): ?>
+                    <li class="collection-item avatar">
+                      <img src="<?=base_url('assets/images/avatar.jpg')?>" alt="" class="circle">
+                      <span class="title">Maco Super Cortes</span>
+                      <p>First Line <?=$y?>
+                        <br> Second Line
+                      </p>
+                      <div class="secondary-content">
+                        <input class="with-gap" name="<?=$x?>" type="radio" id="<?=$x?>test<?=$y?>">
+                        <label for="<?=$x?>test<?=$y?>">Vote Me!</label>
+                      </div>
+                    </li>                  
+                  <?php endfor; ?>
+                  </ul>
+                </div>         
+              </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <button type="submit" class="btn waves-effect yellow darken-1 col s12">Login</button>
-          </div>
-        </div>        
-      </form>
+          <?php endfor; ?>
 
+
+        <div class="row valign-wrapper">     
+            <button type="submit" class="btn waves-effect green darken-1 col s5 offset-s3">Submit Vote</button>    
+            <p class="col s4"><a href="#">Submit Later</a></p><!-- /.center -->
+        </div>
+
+ 
       <?php $this->load->view('inc/copy_footer');?>
     </div>
-  </div>
+
 
     <!-- ================================================
     Scripts

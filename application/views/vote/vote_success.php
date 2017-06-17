@@ -47,7 +47,6 @@
   <link href="<?=base_url('assets/css/prism.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
   <link href="<?=base_url('assets/js/plugins/perfect-scrollbar/perfect-scrollbar.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
   
-  
 </head>
 
 <body class="indigo darken-2">
@@ -60,51 +59,21 @@
   <!-- End Page Loading -->
 
 
-
-  <div id="login-page" class="row">
-    <div class="col s12 z-depth-4 card-panel login-border">
-
-      <?=form_open('verifylogin', array('class' => 'login-form'))?>
+    <div class="col s12 m8 l6 z-depth-4 card-panel login-border vote-container">
         <div class="row">
           <div class="input-field col s12 center">
             <img src="<?=base_url()?>assets/images/sti_header.png" alt="" class="responsive-img valign">
             <p class="center login-form-text"><?=$site_title?></p>
           </div>
         </div>
-        <div class="row margin center">  
-          <?php
-          //SUCCESS ACTION
-              $this->form_validation->set_error_delimiters('', '');
-               if($this->session->flashdata('success')) { ?>
-              <div class="card-panel green">
-                 <span class="white-text"><i class="mdi-action-done tiny"></i> <?php echo $this->session->flashdata('success'); ?></span>
-              </div>
-          <?php } ?>   
-            <?php   
-             $this->form_validation->set_error_delimiters('', '');          
-            if(validation_errors()) { ?>
-              <div class="card-panel red">              
-                 <span class="white-text"><i class="mdi-alert-warning tiny"></i> <?php echo validation_errors(); ?></span> 
-              </div>               
-            <?php } ?>  
-        </div>
-        <div class="row margin">
-          <div class="input-field col s12">
-            <i class="mdi-action-verified-user prefix"></i>
-            <input id="username" type="text" name="username" class="validate" autocomplete="off" required>
-            <label for="username" class="center-align">Vote Pass</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <button type="submit" class="btn waves-effect yellow darken-1 col s12">Login</button>
-          </div>
-        </div>        
-      </form>
 
+        <h1 class="center col s12">Your vote is Submitted!</h1>
+        <p class="center">Thank you for voting! To check the results, please visit the <a href="<?=base_url('vote/results')?>">Result Page</a>.</p><!-- /.center -->
+        <p class="center">Are you happy with the new Voting System? Rate us a Five Star!</p><!-- /.center -->
+ 
       <?php $this->load->view('inc/copy_footer');?>
     </div>
-  </div>
+
 
     <!-- ================================================
     Scripts
