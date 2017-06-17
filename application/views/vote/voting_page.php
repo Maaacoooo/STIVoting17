@@ -86,7 +86,7 @@
         </div>
         
         <?php for($x=1;$x<=2;$x++): ?>
-        <div id="input-radio-buttons" class="section card-panel">
+        <div class="section card-panel">
               <h4 class="header">President <?=$x?></h4>
               <div class="row">
                 <div class="col s12 l12">                 
