@@ -64,7 +64,7 @@
   <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel login-border">
 
-      <?=form_open('verifylogin', array('class' => 'login-form'))?>
+      <?=form_open('login', array('class' => 'login-form'))?>
         <div class="row">
           <div class="input-field col s12 center">
             <img src="<?=base_url('assets/images/sti_header.png')?>" alt="" class="responsive-img valign">
@@ -91,8 +91,8 @@
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-action-verified-user prefix"></i>
-            <input id="username" type="text" name="username" class="validate" autocomplete="off" required>
-            <label for="username" class="center-align">Vote Pass</label>
+            <input id="votepass" type="text" name="votepass" class="validate" autocomplete="off" required>
+            <label for="votepass" class="center-align">Vote Pass</label>
           </div>
         </div>
         <div class="row">
