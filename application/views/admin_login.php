@@ -29,21 +29,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="msapplication-tap-highlight" content="no">
-  <title><?=$title?> &middot; <?=$site_title?></title>
+  <title>Login</title>
 
-  <link rel="icon" href="<?=base_url('assets/images/favicon/sti.png')?>" sizes="32x32">
+  <!-- Favicons-->
+  <link rel="icon" href="<?=base_url()?>assets/images/favicon/favicon-32x32.png" sizes="32x32">
+  <!-- Favicons-->
+  <link rel="apple-touch-icon-precomposed" href="<?=base_url()?>assets/images/favicon/apple-touch-icon-152x152.png">
 
   <link href="<?=base_url()?>assets/css/page.css" type="text/css" rel="stylesheet" media="screen,projection">
-  
- <!-- CORE CSS-->
 
-  <link href="<?=base_url('assets/css/materialize.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="<?=base_url('assets/css/style.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="<?=base_url('assets/css/page-center.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
+  <!-- CORE CSS-->
+
+  <link href="<?=base_url()?>assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="<?=base_url()?>assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="<?=base_url()?>assets/css/page-center.css" type="text/css" rel="stylesheet" media="screen,projection">
 
   <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
-  <link href="<?=base_url('assets/css/prism.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="<?=base_url('assets/js/plugins/perfect-scrollbar/perfect-scrollbar.css')?>" type="text/css" rel="stylesheet" media="screen,projection">k href="<?=base_url()?>assets/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="<?=base_url()?>assets/css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="<?=base_url()?>assets/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
   
 </head>
 
@@ -108,21 +111,21 @@
     </div>
   </div>
 
-<!-- ================================================
+    <!-- ================================================
     Scripts
     ================================================ -->
 
     <!-- jQuery Library -->
-    <script type="text/javascript" src="<?=base_url('assets/js/jquery-1.11.2.min.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url()?>assets/js/jquery-1.11.2.min.js"></script>
     <!--materialize js-->
-    <script type="text/javascript" src="<?=base_url('assets/js/materialize.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url()?>assets/js/materialize.js"></script>
     <!--prism-->
-    <script type="text/javascript" src="<?=base_url('assets/js/prism.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url()?>assets/js/prism.js"></script>
     <!--scrollbar-->
-    <script type="text/javascript" src="<?=base_url('assets/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url()?>assets/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-    <script type="text/javascript" src="<?=base_url('assets/js/plugins.js')?>"></script>
+    <script type="text/javascript" src="<?=base_url()?>assets/js/plugins.js"></script>
 
 </body>
 </html>

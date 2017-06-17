@@ -32,8 +32,9 @@
   <title><?=$title?> &middot; <?=$site_title?></title>
 
   <!-- Favicons-->
-  <link rel="icon" href="<?=base_url('assets/images/favicon/sti.png')?>" sizes="32x32">
+  <link rel="icon" href="<?=base_url()?>assets/images/favicon/favicon-32x32.png" sizes="32x32">
   <!-- Favicons-->
+  <link rel="apple-touch-icon-precomposed" href="<?=base_url()?>assets/images/favicon/apple-touch-icon-152x152.png">
 
   <link href="<?=base_url('assets/css/page.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
 
@@ -46,7 +47,6 @@
   <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
   <link href="<?=base_url('assets/css/prism.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
   <link href="<?=base_url('assets/js/plugins/perfect-scrollbar/perfect-scrollbar.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
-  
   
 </head>
 
@@ -102,7 +102,9 @@
         </div>        
       </form>
 
-      <?php $this->load->view('inc/copy_footer');?>
+      <div class="copyright-footer grey-text">
+      	<small>Developed by ever pogi <a href="#">congtibsh</a></small>
+      </div><!-- /.copyright-footer -->
     </div>
   </div>
 
