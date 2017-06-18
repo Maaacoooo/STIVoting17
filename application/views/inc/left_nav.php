@@ -41,83 +41,68 @@
                           
                       </div>
                       <div class="col col s8 m8 l8">
-                          <ul id="profile-dropdown" class="dropdown-content">
-                              <li><a href="<?=base_url('profile')?>"><i class="mdi-action-face-unlock"></i> Profile</a>
-                              </li>
+                          <ul id="profile-dropdown" class="dropdown-content">                    
                               <li><a href="<?=base_url('settings')?>"><i class="mdi-action-settings"></i> Settings</a>
                               </li>                              
                               <li class="divider"></li>                              
-                              <li><a href="<?=base_url('logout')?>"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
+                              <li><a href="<?=base_url('sys/dashboard/logout')?>"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
                               </li>
                           </ul>
-                          <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><?=$user['name']?> <?=$user['lastname']?><i class="mdi-navigation-arrow-drop-down right"></i></a>
+                          <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><?=$user['name']?><i class="mdi-navigation-arrow-drop-down right"></i></a>
                           <p class="user-roal"><?=$user['usertype']?></p>
                       </div>
                   </div>
               </li>
-              <li class="bold"><a href="<?=base_url('dashboard')?>" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Home</a>
-              </li>
-              <li class="bold"><a href="<?=base_url('announcements')?>" class="waves-effect waves-cyan"><i class="mdi-content-flag"></i> Announcements</a>
-              </li> 
-              <li class="bold"><a href="<?=base_url('events')?>" class="waves-effect waves-cyan"><i class="mdi-editor-insert-invitation"></i> Events</a>
-              </li>
-              <li class="bold"><a href="<?=base_url('alumni')?>" class="waves-effect waves-cyan"><i class="mdi-social-school"></i> Alumni</a>
-              </li> 
-              <li class="bold"><a href="<?=base_url('messages')?>" class="waves-effect waves-cyan"><i class="mdi-communication-email"></i> Messages</a>
-              </li>
-              <?php if($user['usertype'] == 'Administrator') { ?>     
+              <li class="bold"><a href="<?=base_url('dashboard')?>" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a></li>             
+              <?php if($user['usertype'] == 'Administrator'): ?>     
               <li class="li-hover"><div class="divider"></div></li>
               <li class="li-hover"><p class="ultra-small margin more-text">ADMIN OPTIONS</p></li>  
               <li class="no-padding">
                   <ul class="collapsible collapsible-accordion">
-                      <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-child"></i> Administrators</a>
+                      <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-child"></i> System Users</a>
                           <div class="collapsible-body">
                               <ul>
-                                  <li><a href="<?=base_url('users/create')?>">Register Administrator</a>
+                                  <li><a href="<?=base_url('users/create')?>">Register Users</a>
                                   </li>                                       
-                                  <li><a href="<?=base_url('users')?>">Administrators</a>
+                                  <li><a href="<?=base_url('users')?>">Users</a>
                                   </li>                                
+                              </ul>
+                          </div>
+                      </li>
+                    </ul>
+              </li>            
+              <?php endif; ?> 
+
+              <li class="li-hover"><div class="divider"></div></li>
+              <li class="li-hover"><p class="ultra-small margin more-text">VOTING SYSTEM OPTIONS</p></li>  
+              <li class="no-padding">
+                  <ul class="collapsible collapsible-accordion">
+                      <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-social-school"></i> Candidates</a>
+                          <div class="collapsible-body">
+                              <ul>
+                                  <li><a href="<?=base_url('alumni/create')?>">Register Candidate</a></li>                                       
+                                  <li><a href="<?=base_url('alumni')?>">Year Level</a></li>  
+                                  <li><a href="<?=base_url('alumni/years')?>">Course</a></li>  
+                                  <li><a href="<?=base_url('alumni/courses')?>">Party List</a></li>                  
+                              </ul>
+                          </div>
+                      </li>
+                    </ul>
+              </li>        
+              <li class="bold"><a href="<?=base_url('dashboard')?>" class="waves-effect waves-cyan"><i class="mdi-communication-vpn-key"></i> Voting Passes</a></li> 
+              <li class="bold"><a href="<?=base_url('dashboard')?>" class="waves-effect waves-cyan"><i class="mdi-editor-insert-chart"></i> Voting Results</a></li> 
+              <li class="no-padding">
+                  <ul class="collapsible collapsible-accordion">
+                      <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-settings"></i> Voting Settings</a>
+                          <div class="collapsible-body">
+                              <ul>
+                                  <li><a href="<?=base_url('alumni/create')?>">Pages</a></li>                                       
+                                  <li><a href="<?=base_url('alumni')?>">System Settings</a></li>                  
                               </ul>
                           </div>
                       </li>
                     </ul>
               </li> 
-              <li class="no-padding">
-                  <ul class="collapsible collapsible-accordion">
-                      <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-social-school"></i> Alumni</a>
-                          <div class="collapsible-body">
-                              <ul>
-                                  <li><a href="<?=base_url('alumni/create')?>">Register Alumni</a>
-                                  </li>                                       
-                                  <li><a href="<?=base_url('alumni')?>">Alumni</a>
-                                  </li>  
-                                  <li><a href="<?=base_url('alumni/years')?>">School Year</a>
-                                  </li>  
-                                  <li><a href="<?=base_url('alumni/courses')?>">Course</a>
-                                  </li>   
-                                  <li><a href="<?=base_url('alumni/reports')?>" target="_blank">Alumni Student Report</a>
-                                  </li>                                
-                              </ul>
-                          </div>
-                      </li>
-                    </ul>
-              </li>             
-              <?php } ?>   
-              <?php if($user['usertype'] == 'Administrator' OR $user['usertype'] == 'Moderator') { ?>     
-              <li class="li-hover"><div class="divider"></div></li>
-              <li class="li-hover"><p class="ultra-small margin more-text">MODERATOR OPTIONS</p></li>  
-              <li class="bold">
-                <a href="<?=base_url('announcements/create')?>" class="waves-effect waves-cyan">
-                  <i class="mdi-content-flag"></i> Create Announcement
-                </a>                
-              </li>  
-              <li class="bold">
-                <a href="<?=base_url('events/create')?>" class="waves-effect waves-cyan">
-                  <i class="mdi-editor-insert-invitation"></i> Create Event
-                </a>
-              </li>       
-              <?php } ?>            
-              
           </ul>         
           <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only grey darken-4"><i class="mdi-navigation-menu" ></i></a>
       </aside> 

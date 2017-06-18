@@ -107,7 +107,7 @@ class Dashboard extends CI_Controller {
 
 	public function logout() {
 		$this->session->set_flashdata('success', 'You sucessfuly logged out!');
-		$this->session->unset_userdata('voter_logged_in');		  
-		redirect('login', 'refresh');
+		$this->session->unset_userdata('admin_logged_in');		  
+		redirect('sys/dashboard/login', 'refresh');
 	}
 }

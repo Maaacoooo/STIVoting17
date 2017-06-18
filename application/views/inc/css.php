@@ -23,9 +23,7 @@
  */
 ?>
     <!-- Favicons-->
-    <link rel="icon" href="<?=base_url('assets/images/favicon/techdepot_32x32.png')?>" sizes="32x32">
-    <!-- Favicons-->
-    <link rel="apple-touch-icon-precomposed" href="<?=base_url('assets/images/favicon/techdepot_152x152.png')?>">
+    <link rel="icon" href="<?=base_url('assets/images/favicon/sti_45x45.png')?>" sizes="45x45">
 
     <!-- CUSTOM CSS -->
     <link href="<?=base_url('assets/css/page.css')?>" type="text/css" rel="stylesheet">
