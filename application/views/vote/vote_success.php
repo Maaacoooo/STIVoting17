@@ -1,11 +1,11 @@
 <?php
 /*
- * Copyright (c)2016, Jenmar "Maco" Cortes
+ * Copyright (c)2017, Jenmar "Maco" Cortes
  * Copyright TechDepot PH
  * All Rights Reserved
  * 
  * This license is a legal agreement between you and the Maco Cortes
- * for the use of ALUMNI INFORMATION SYSTEM referred to as the "Software"
+ * for the use of STI Online Voting Systen referred to as the "Software"
  * By obtaining the Software you agree to comply with the terms and conditions of this license.
  *
  * PERMITTED USE
