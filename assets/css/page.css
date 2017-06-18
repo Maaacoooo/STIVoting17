@@ -214,3 +214,11 @@ VOTE PAGE
 	}
 }
 
+/**
+ * Voting Passes Page 
+ */
+
+div.table-passes div.col {
+	border: 1px solid #cecece;
+	border-collapse: collapse;
+}

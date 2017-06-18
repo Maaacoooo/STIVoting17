@@ -21,15 +21,24 @@
  * maco@techdepot-ph.com
  * TechDepot-PH.com
  */
-
 Class Vote_model extends CI_Model
 {
 
-/**
- * This model controls all VOTE  related functionalties
- */
 
-     function check_votepass($pass) {
+/**
+ * ----------------------------------------------------------------------------
+ * ----------------------------------------------------------------------------
+ * 
+ * VOTE PASS / VOTE KEYS
+ *
+ * ---------------------------------------------------------------------------
+ */
+    /**
+     * Verifies the validity or existence of the vote pass
+     * @param  String   $pass   the vote pass
+     * @return boolean          TRUE if pass exist
+     */
+    function check_votepass($pass) {
 
              $this->db->select('*');        
              $this->db->where('key', $pass);          
@@ -49,7 +58,11 @@ Class Vote_model extends CI_Model
 
     }
 
-
+    /**
+     * This verifies the votepass if it is used or not
+     * @param  String   $pass   the vote pass
+     * @return boolean          TRUE if is_used
+     */
     function verify_votepass($pass) {
 
              $this->db->select('*');        
@@ -71,16 +84,84 @@ Class Vote_model extends CI_Model
 
     }
 
-    function generate_key($key) { 
-      
+    /**
+     * [generate_key description]
+     * @param  int      $key     the number of keys to be generated
+     * @return boolean           it actually returns TRUE all the time. This could be VOID.
+     */
+    function generate_key($key) {       
+        for ($x=1;$x<=$key;$x++) { 
+
             $data = array(              
-                'key' => $key  
+                'key' => random_string('alnum', 6)  
              );
        
-       return $this->db->insert('vote_keys', $data);          
+            $this->db->insert('vote_keys', $data);
+        }  
+        return TRUE;       
+    }
+
+    /**
+     * This Clears the vote_key table
+     * @return [void] [just a wild action]
+     */
+    function clear_votekeys() {
+        $this->db->empty_table('vote_keys');
+    }
+
+    /** 
+     * @param [String] $[str] [< 'Identifier of the query; all' = return all;>]
+     * @return [Integer] [<Returns an Integer>]
+     */
+    
+    function fetch_votepass($str) {
+       
+       if($str == 'all') {
+            $query = $this->db->get('vote_keys');
+            
+        } else {
+            $this->db->where('is_used', $str);
+            $query = $this->db->get('vote_keys');            
+        }
+
+        return $query->result_array();
         
     }
 
+    /** 
+     * @param [String] $[str] [< 'Identifier of the query; all' = return all;>]
+     * @return [Integer] [<Returns an Integer>]
+     */
+    
+    function count_votepass($str) {
+
+        if($str == 'all') {
+            return $this->db->count_all_results('vote_keys');
+        } else {
+            $this->db->where('is_used', $str);
+            return $this->db->count_all_results('vote_keys');
+        }
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+
+
+    /**
+     * ------------------------------------------------------------------------------------------
+     * ------------------------------------------------------------------------------------------
+     * VOTES 
+     *
+     *-------------------------------------------------------------------------------------------
+     */
+    
+    /**
+     * This Clears the votes table
+     * @return [void] [just a wild action]
+     */
+    function clear_votes() {
+        $this->db->empty_table('votes');
+    }
 
     // CREATE DATA ////////////////////////////////////////////////////////////////////
 
