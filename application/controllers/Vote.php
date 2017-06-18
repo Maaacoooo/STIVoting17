@@ -71,14 +71,7 @@ class Vote extends CI_Controller {
 
 	}
 
-	public function genkey() {
-		for($x=1;$x<=10;$x++) {
-			$rand = random_string('alnum', 5);
-			$this->vote_model->generate_key($rand);
-
-			echo $rand . "<br/>";
-		}
-	}
+	
 
 	public function logout() {
 		$this->session->set_flashdata('success', 'You sucessfuly logged out!');
