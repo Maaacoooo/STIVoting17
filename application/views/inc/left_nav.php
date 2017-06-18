@@ -89,7 +89,7 @@
                       </li>
                     </ul>
               </li>        
-              <li class="bold"><a href="<?=base_url('dashboard')?>" class="waves-effect waves-cyan"><i class="mdi-communication-vpn-key"></i> Voting Passes</a></li> 
+              <li class="bold"><a href="<?=base_url('sys/voting/voting_passes/')?>" class="waves-effect waves-cyan"><i class="mdi-communication-vpn-key"></i> Voting Passes</a></li> 
               <li class="bold"><a href="<?=base_url('dashboard')?>" class="waves-effect waves-cyan"><i class="mdi-editor-insert-chart"></i> Voting Results</a></li> 
               <li class="no-padding">
                   <ul class="collapsible collapsible-accordion">
