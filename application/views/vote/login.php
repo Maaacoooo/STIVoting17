@@ -72,21 +72,24 @@
           </div>
         </div>
         <div class="row margin center">  
-          <?php
-          //SUCCESS ACTION
-              $this->form_validation->set_error_delimiters('', '');
-               if($this->session->flashdata('success')) { ?>
+          <?php if($this->session->flashdata('success')): //SUCCESS ACTION  ?>
               <div class="card-panel green">
                  <span class="white-text"><i class="mdi-action-done tiny"></i> <?php echo $this->session->flashdata('success'); ?></span>
               </div>
-          <?php } ?>   
-            <?php   
+          <?php endif; ?> 
+          <?php if($this->session->flashdata('error')): //SUCCESS ACTION  ?>
+              <div class="card-panel red">
+                 <span class="white-text"><i class="mdi-alert-warning tiny"></i> <?php echo $this->session->flashdata('error'); ?></span>
+              </div>
+          <?php endif; ?>   
+          <?php   
              $this->form_validation->set_error_delimiters('', '');          
-            if(validation_errors()) { ?>
+            if(validation_errors()): ?>
               <div class="card-panel red">              
                  <span class="white-text"><i class="mdi-alert-warning tiny"></i> <?php echo validation_errors(); ?></span> 
               </div>               
-            <?php } ?>  
+          <?php endif; ?> 
+  
         </div>
         <div class="row margin">
           <div class="input-field col s12">
