@@ -3,21 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
 	
 	public function __construct()	{
 		parent::__construct();		
@@ -29,7 +14,7 @@ class Login extends CI_Controller {
 		$data['site_title'] = APP_NAME;	
 
 
-		if($this->session->userdata('logged_in'))	{
+		if($this->session->userdata('voter_logged_in'))	{
 		        redirect('vote/instructions', 'refresh');
 		} else {
 			
@@ -38,7 +23,7 @@ class Login extends CI_Controller {
 			 
 			   if($this->form_validation->run() == FALSE)	{
 
-					$this->load->view('login', $data);
+					$this->load->view('vote/login', $data);
 
 				} else {
 
@@ -53,7 +38,8 @@ class Login extends CI_Controller {
 		if($this->vote_model->check_votepass($pass)) { //checks the existence of the vote pass
 
 			if($this->vote_model->verify_votepass($pass)) { //checks the vote pass validity
-				return true;
+				$this->session->set_userdata('voter_logged_in', array('votepass' => $pass)); //sets votepass session data
+				return true;				
 			} else {
 				$this->form_validation->set_message('check_votepass', 'Vote Pass is already used!');
 				return false;
