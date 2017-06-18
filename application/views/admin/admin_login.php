@@ -29,7 +29,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="msapplication-tap-highlight" content="no">
-  <title>Login</title>
+  <title><?=$title?> &middot; <?=$site_title?> </title>
 
    <!-- Favicons-->
   <link rel="icon" href="<?=base_url('assets/images/favicon/sti.png')?>" sizes="32x32">
@@ -63,7 +63,7 @@
   <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel login-border">
 
-      <?=form_open('verifylogin', array('class' => 'login-form'))?>
+      <?=form_open('sys/dashboard/login', array('class' => 'login-form'))?>
         <div class="row">
           <div class="input-field col s12 center">
             <img src="<?=base_url()?>assets/images/sti_header.png" alt="" class="responsive-img valign">
@@ -71,21 +71,23 @@
           </div>
         </div>
         <div class="row margin center">  
-          <?php
-          //SUCCESS ACTION
-              $this->form_validation->set_error_delimiters('', '');
-               if($this->session->flashdata('success')) { ?>
+          <?php if($this->session->flashdata('success')): //SUCCESS ACTION  ?>
               <div class="card-panel green">
                  <span class="white-text"><i class="mdi-action-done tiny"></i> <?php echo $this->session->flashdata('success'); ?></span>
               </div>
-          <?php } ?>   
-            <?php   
+          <?php endif; ?> 
+          <?php if($this->session->flashdata('error')): //SUCCESS ACTION  ?>
+              <div class="card-panel red">
+                 <span class="white-text"><i class="mdi-alert-warning tiny"></i> <?php echo $this->session->flashdata('error'); ?></span>
+              </div>
+          <?php endif; ?>   
+          <?php   
              $this->form_validation->set_error_delimiters('', '');          
-            if(validation_errors()) { ?>
+            if(validation_errors()): ?>
               <div class="card-panel red">              
                  <span class="white-text"><i class="mdi-alert-warning tiny"></i> <?php echo validation_errors(); ?></span> 
               </div>               
-            <?php } ?>  
+          <?php endif; ?> 
         </div>
         <div class="row margin">
           <div class="input-field col s12">
