@@ -32,8 +32,7 @@
   <title><?=$title?> &middot; <?=$site_title?></title>
 
   <!-- Favicons-->
-  <link rel="icon" href="<?=base_url('assets/images/favicon/sti.png')?>" sizes="32x32">
-  <!-- Favicons-->
+  <link rel="icon" href="<?=base_url('assets/images/favicon/sti_45x45.png')?>" sizes="45x45">
 
   <link href="<?=base_url('assets/css/page.css')?>" type="text/css" rel="stylesheet" media="screen,projection">
 
