@@ -42,10 +42,10 @@
                       </div>
                       <div class="col col s8 m8 l8">
                           <ul id="profile-dropdown" class="dropdown-content">                    
-                              <li><a href="<?=base_url('settings')?>"><i class="mdi-action-settings"></i> Settings</a>
+                              <li><a href="<?=base_url('settings')?>"><i class="mdi-action-settings"></i>Profile</a>
                               </li>                              
                               <li class="divider"></li>                              
-                              <li><a href="<?=base_url('sys/dashboard/logout')?>"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
+                              <li><a href="<?=base_url('sys/dashboard/logout')?>"><i class="mdi-hardware-keyboard-tab"></i>Logout</a>
                               </li>
                           </ul>
                           <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><?=$user['name']?><i class="mdi-navigation-arrow-drop-down right"></i></a>
@@ -80,10 +80,10 @@
                       <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-social-school"></i> Candidates</a>
                           <div class="collapsible-body">
                               <ul>
-                                  <li><a href="<?=base_url('alumni/create')?>">Register Candidate</a></li>                                       
-                                  <li><a href="<?=base_url('alumni')?>">Year Level</a></li>  
-                                  <li><a href="<?=base_url('alumni/years')?>">Course</a></li>  
-                                  <li><a href="<?=base_url('alumni/courses')?>">Party List</a></li>                  
+                                  <li><a href="<?=base_url('sys/candidates/')?>">Candidate List</a></li>                       
+                                  <li><a href="<?=base_url('sys/candidates/years')?>">Year Level</a></li>  
+                                  <li><a href="<?=base_url('sys/candidates/courses')?>">Course</a></li>  
+                                  <li><a href="<?=base_url('sys/candidates/partylists')?>">Party List</a></li>                  
                               </ul>
                           </div>
                       </li>
@@ -96,8 +96,8 @@
                       <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-settings"></i> Voting Settings</a>
                           <div class="collapsible-body">
                               <ul>
-                                  <li><a href="<?=base_url('alumni/create')?>">Pages</a></li>                                       
-                                  <li><a href="<?=base_url('alumni')?>">System Settings</a></li>                  
+                                  <li><a href="<?=base_url('sys/voting/create')?>">Pages</a></li>                                       
+                                  <li><a href="<?=base_url('sys/voting')?>">System Settings</a></li>                  
                               </ul>
                           </div>
                       </li>

@@ -26,7 +26,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Voting extends CI_Controller {
+class Candidates extends CI_Controller {
 
 	public function __construct()	{
 		parent::__construct();		
