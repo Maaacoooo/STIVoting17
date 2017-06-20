@@ -164,7 +164,7 @@ Class Vote_model extends CI_Model
     }
 
     // CREATE DATA ////////////////////////////////////////////////////////////////////
-
+    
     function create() { 
       
             $data = array(              
