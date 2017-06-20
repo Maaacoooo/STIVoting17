@@ -112,7 +112,7 @@
                 <div class="card-action">
                   <div class="row">
                     <a href="#generateModal" class="modal-trigger btn waves-effect yellow darken-1 deep-purple-text right">Generate <i class="mdi-action-autorenew right"></i></a>
-                    <a href="#" class="btn waves-effect cyan white-text right">Print <i class="mdi-action-print right"></i></a> </div><!-- /.row -->                  
+                    <a href="<?=base_url('sys/voting/print_page')?>" target="_blank" class="btn waves-effect cyan white-text right">Print <i class="mdi-action-print right"></i></a> </div><!-- /.row -->                  
                   </div>              
               </div><!-- /.col s12 -->
             </div><!-- /.row card -->           

@@ -34,7 +34,7 @@ class Candidates extends CI_Controller {
        $this->load->model('vote_model');
 	}	
 
-
+	
 	public function index()		{
 
 		$userdata = $this->session->userdata('admin_logged_in'); //it's pretty clear it's a userdata
