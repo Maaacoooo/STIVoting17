@@ -163,6 +163,7 @@ Class Vote_model extends CI_Model
         $this->db->empty_table('votes');
     }
 
+<<<<<<< HEAD
     // CREATE DATA ////////////////////////////////////////////////////////////////////
     
     function create() { 
@@ -184,17 +185,9 @@ Class Vote_model extends CI_Model
     }
 
 // UPDATE DATA ////////////////////////////////////////////////////////////////////
+=======
+>>>>>>> 89778c2949d12bc9c19cf6900a0b75a1a8ac6b0e
    
-   function update(){
-
-            $data = array(              
-                'title' => $this->input->post('value')  
-             );
-
-          $this->db->where('id', $this->encrypt->decode($this->input->post('id')));
-          return $this->db->update($this->encrypt->decode($this->input->post('key')), $data);
-
-    }
 
 
 }

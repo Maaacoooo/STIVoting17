@@ -34,7 +34,23 @@ class Candidates extends CI_Controller {
        $this->load->model('vote_model');
 	}	
 
+<<<<<<< HEAD
 
+=======
+	
+	public function index()		{
+
+		$userdata = $this->session->userdata('admin_logged_in'); //it's pretty clear it's a userdata
+
+		if($userdata)	{
+
+			$data['title'] = 'Dashboard';
+			$data['site_title'] = APP_NAME;
+			$data['user'] = $this->user_model->userdetails($userdata['username']); //fetches users record
+
+
+			$this->load->view('admin/blank', $data);
+>>>>>>> 89778c2949d12bc9c19cf6900a0b75a1a8ac6b0e
 
 	public function index()		{
 
