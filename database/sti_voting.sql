@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2017 at 04:05 AM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Generation Time: Jun 20, 2017 at 06:11 AM
+-- Server version: 10.1.22-MariaDB
+-- PHP Version: 7.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -50,12 +52,18 @@ INSERT INTO `candidate` (`id`, `name`, `position`, `course`, `year`, `party`, `i
 --
 
 CREATE TABLE `ci_sessions` (
-  `session_id` varchar(40) NOT NULL DEFAULT '0',
-  `ip_address` varchar(45) NOT NULL DEFAULT '0',
-  `user_agent` varchar(120) NOT NULL,
-  `last_activity` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `user_data` text NOT NULL
+  `id` varchar(128) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ci_sessions`
+--
+
+INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('btld8k35033gn4pm5mblmj420r9cef8f', '::1', 1497931754, 0x5f5f63695f6c6173745f726567656e65726174657c693a313439373933313535383b61646d696e5f6c6f676765645f696e7c613a313a7b733a383a22757365726e616d65223b733a343a226d61636f223b7d737563636573737c733a33333a22537563636573732120566f74696e67205061737365732047656e65726174656421223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d);
 
 -- --------------------------------------------------------
 
@@ -139,6 +147,13 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`username`, `password`, `name`, `usertype`, `img`, `created_at`, `updated_at`) VALUES
+('maco', '$2y$10$sUhJAzuqmAp5okaaI0nqs.jAPWgT0yFgvYV0v12Nj9quvAgM2gp3.', 'Maco Cortes', 'Administrator', NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -148,6 +163,13 @@ CREATE TABLE `users` (
 CREATE TABLE `usertypes` (
   `title` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `usertypes`
+--
+
+INSERT INTO `usertypes` (`title`) VALUES
+('Administrator');
 
 -- --------------------------------------------------------
 
@@ -178,27 +200,16 @@ CREATE TABLE `vote_keys` (
 --
 
 INSERT INTO `vote_keys` (`key`, `updated_at`, `is_used`) VALUES
-('0CJPR', '2017-06-18 00:03:27', 0),
-('3akLN', '2017-06-18 00:03:27', 0),
-('4Rx1U', '2017-06-18 00:03:27', 0),
-('7JGfh', '2017-06-18 00:03:27', 0),
-('8pia0', '2017-06-18 00:03:27', 0),
-('8pRuE', '2017-06-18 00:03:27', 0),
-('aCYGD', '2017-06-18 00:02:29', 0),
-('aL8Cq', '2017-06-18 00:03:27', 0),
-('bAGNk', '2017-06-18 00:03:27', 0),
-('fVGNm', '2017-06-18 00:02:29', 0),
-('GPNM5', '2017-06-18 00:02:29', 0),
-('jrCam', '2017-06-18 00:02:29', 0),
-('KjXmk', '2017-06-18 00:02:29', 0),
-('KWxza', '2017-06-18 00:02:29', 0),
-('LcHRq', '2017-06-18 00:03:27', 0),
-('maco', '2017-06-17 23:43:10', 0),
-('P1isG', '2017-06-18 00:02:29', 0),
-('p4zYw', '2017-06-18 00:02:29', 0),
-('PTHDZ', '2017-06-18 00:03:27', 0),
-('V7tBu', '2017-06-18 00:02:29', 0),
-('vKPNF', '2017-06-18 00:02:29', 0);
+('3euWRf', '2017-06-20 12:09:14', 0),
+('5oCwvn', '2017-06-20 12:09:13', 0),
+('AKSzPs', '2017-06-20 12:09:13', 0),
+('bTn8AN', '2017-06-20 12:09:13', 0),
+('cK8p5j', '2017-06-20 12:09:13', 0),
+('FUZm9E', '2017-06-20 12:09:14', 0),
+('GkgUiS', '2017-06-20 12:09:14', 0),
+('oE3TqN', '2017-06-20 12:09:14', 0),
+('q7uoQU', '2017-06-20 12:09:14', 0),
+('srKVIG', '2017-06-20 12:09:14', 0);
 
 -- --------------------------------------------------------
 
@@ -235,8 +246,7 @@ ALTER TABLE `candidate`
 -- Indexes for table `ci_sessions`
 --
 ALTER TABLE `ci_sessions`
-  ADD PRIMARY KEY (`session_id`),
-  ADD KEY `last_activity_idx` (`last_activity`);
+  ADD KEY `ci_sessions_timestamp` (`timestamp`);
 
 --
 -- Indexes for table `course`
@@ -332,6 +342,7 @@ ALTER TABLE `logs`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `FKusertype` FOREIGN KEY (`usertype`) REFERENCES `usertypes` (`title`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
