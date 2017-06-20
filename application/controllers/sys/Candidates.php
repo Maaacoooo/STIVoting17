@@ -35,35 +35,14 @@ class Candidates extends CI_Controller {
 	}	
 
 
+
 	public function index()		{
 
 		$userdata = $this->session->userdata('admin_logged_in'); //it's pretty clear it's a userdata
 
 		if($userdata)	{
 
-			$data['title'] = 'Dashboard';
-			$data['site_title'] = APP_NAME;
-			$data['user'] = $this->user_model->userdetails($userdata['username']); //fetches users record
-
-
-			$this->load->view('admin/blank', $data);
-
-		} else {
-
-			$this->session->set_flashdata('error', 'You need to login!');
-			redirect('sys/dashboard/login', 'refresh');
-		}
-
-	}
-
-
-	public function voting_passes()		{
-
-		$userdata = $this->session->userdata('admin_logged_in'); //it's pretty clear it's a userdata
-
-		if($userdata)	{
-
-			$data['title'] = 'Voting Passes';
+			$data['title'] = 'Candidates';
 			$data['site_title'] = APP_NAME;
 			$data['user'] = $this->user_model->userdetails($userdata['username']); //fetches users record
 
@@ -77,7 +56,7 @@ class Candidates extends CI_Controller {
 			$this->form_validation->set_rules('passes', 'Number of Vote Pass', 'trim|required|less_than_equal_to[5000]|greater_than[0]'); 
 
 			if($this->form_validation->run() == FALSE)	{
-				$this->load->view('admin/voting/voting_passes', $data);
+				$this->load->view('admin/voting/candidates', $data);
 			} else {
 
 				//Clear Votes and Vote Pass Tables
