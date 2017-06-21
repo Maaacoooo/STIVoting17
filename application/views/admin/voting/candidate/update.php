@@ -62,7 +62,7 @@
               <div class="col s12 m12 l12">
                 <h5 class="breadcrumbs-title"><?=$title?></h5>
                 <ol class="breadcrumb">
-                    <li><a href="<?=base_url('sys')?>">Voting System</a></li>
+                    <li><a href="#">Voting System</a></li>
                     <li><a href="<?=base_url('sys/candidates/')?>">Candidates</a></li>
                     <li class="active"><?=$title?></li>
                 </ol>
@@ -125,7 +125,7 @@
                                      </div><!-- /.card light-blue -->
                                    </div><!-- /.col s12 -->
                                  </div><!-- /.row -->           
-                  <?=form_open_multipart('sys/candidates', array('class' => 'card-content'))?>
+                  <?=form_open_multipart('sys/candidates/update/' . $info['id'], array('class' => 'card-content'))?>
                        <div class="row">
                          <div class="input-field col s12 l9">
                             <input id="name" name="name" type="text" class="validate" value="<?=$info['name']?>" required>
@@ -213,16 +213,41 @@
                        </div><!-- /.row -->
                        <div class="row">
                           <div class="input-field col s12">
-                                  <button class="btn amber waves-effect waves-light right" type="submit" name="action">Update Candidate
+                                  <button class="btn amber waves-effect waves-light right" type="submit" name="action">Update
                                     <i class="mdi-editor-mode-edit left"></i>
                                   </button>
-                                </div>
+                          </div>
                        </div><!-- /.row -->
-                      <?=$this->encryption->encrypt('My secret message')?> 
-                      <input type="hidden" name="id"  />
+                       <div class="row">
+                         <div class="input-field col s12">
+                           <a href="#deleteModal" class="modal-trigger btn waves-effect red right">Delete <i class="mdi-action-delete right"></i></a>
+                         </div><!-- /.input-field col s12 -->
+                       </div><!-- /.row -->
+                      
+                      <input type="hidden" name="id" value="<?=$info['id']?>" />
                                   
               </div><!-- /.col s12 l8 -->
             </div><!-- /.row -->
+            <?=form_close()?>
+
+            <!-- Modals -->
+
+           <div id="deleteModal" class="modal">
+              <?=form_open('sys/candidates/delete')?>
+                <div class="modal-content red darken-4 white-text">
+                    <p>Are you sure to delete the record of <span class="strong"><?=$info['name']?></span>?</p>
+                    <p>You <span class="strong">CANNOT UNDO</span> this action.</p>
+                    <input type="hidden" name="id" value="<?=$info['id']?>" />
+                  </div>
+                  <div class="modal-footer grey darken-4">
+                    <a href="#" class="waves-effect waves-red btn-flat amber-text strong modal-action modal-close">Cancel</a>
+                    <button type="submit" class="waves-effect waves-red btn red modal-action">Delete</button>
+                  </div>
+              <?=form_close()?>
+            </div>
+
+
+           <!-- end Modals -->
          
           </div>
         </div>

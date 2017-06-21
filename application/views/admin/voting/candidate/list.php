@@ -62,8 +62,7 @@
               <div class="col s12 m12 l12">
                 <h5 class="breadcrumbs-title"><?=$title?></h5>
                 <ol class="breadcrumb">
-                    <li><a href="<?=base_url()?>">Dashboard</a></li>
-                    <li><a href="<?=base_url()?>">Pages</a></li>
+                    <li><a href="#">Voting System</a></li>         
                     <li class="active"><?=$title?></li>
                 </ol>
               </div>
@@ -121,11 +120,13 @@
                       foreach($results as $row): ?>
                     <tr>
                       <td>
+                        <a href="<?=base_url('sys/candidates/update/' . $row['id'])?>">
                         <?php if($row['img']): ?>
                           <img src="<?=base_url('uploads/'.$row['img'])?>" alt="" class="circle responsive-img valign candidate-img">
                         <?php else: ?>
-                          <i class="mdi-social-person medium grey lighten-2 circle"></i>
+                          <img src="<?=base_url('assets/images/no_image.gif')?>" alt="" class="circle responsive-img valign candidate-img">
                         <?php endif; ?>
+                        </a>
                       </td>
                       <td><a href="<?=base_url('sys/candidates/update/' . $row['id'])?>"><?=$row['name']?></a></td>
                       <td><?=$row['position']?> <span class="badge-label pink"><?=$row['party']?></span></td>

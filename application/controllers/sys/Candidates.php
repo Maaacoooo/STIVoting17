@@ -86,7 +86,7 @@ class Candidates extends CI_Controller {
 			$this->form_validation->set_rules('year', 'Year', 'trim|required'); 
 
 			if($this->form_validation->run() == FALSE)	{
-				$this->load->view('admin/voting/candidates', $data);
+				$this->load->view('admin/voting/candidate/list', $data);
 			} else {			
 
 				//Proceed saving 				
@@ -102,6 +102,99 @@ class Candidates extends CI_Controller {
 				
 			}
 
+
+		} else {
+
+			$this->session->set_flashdata('error', 'You need to login!');
+			redirect('sys/dashboard/login', 'refresh');
+		}
+
+	}
+
+	public function update($id)		{
+
+		$userdata = $this->session->userdata('admin_logged_in'); //it's pretty clear it's a userdata
+
+		if($userdata)	{
+
+			$data['title'] = 'Update Candidate';
+			$data['site_title'] = APP_NAME;
+			$data['user'] = $this->user_model->userdetails($userdata['username']); //fetches users record
+
+			//Page Data 
+			$data['years']		= $this->candidates_model->years();
+			$data['courses']	= $this->candidates_model->courses();
+			$data['party']		= $this->candidates_model->party();
+			$data['positions']	= $this->candidates_model->positions();
+
+			$data['info']		= $this->candidates_model->read_candidate($id);
+
+			//Validate if record exist
+			 //IF NO ID OR NO RESULT, REDIRECT
+				if(!$id OR !$data['info']) {
+					redirect('sys/candidates', 'refresh');
+			}
+
+			//Form Validation for Modal
+			$this->form_validation->set_rules('name', 'Name', 'trim|required'); 
+			$this->form_validation->set_rules('party', 'Partylist', 'trim|required'); 
+			$this->form_validation->set_rules('course', 'Courses', 'trim|required'); 
+			$this->form_validation->set_rules('year', 'Year', 'trim|required'); 
+			$this->form_validation->set_rules('id', 'ID', 'trim|required'); 
+
+			if($this->form_validation->run() == FALSE)	{
+				$this->load->view('admin/voting/candidate/update', $data);
+			} else {			
+
+				//Proceed saving 				
+				$key_id = $this->input->post('id'); //ID of the row
+				if($this->candidates_model->update_candidate($key_id)) {			
+			
+					$this->session->set_flashdata('success', 'Succes! Candidate Updated!');
+					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+				} else {
+					//failure
+					$this->session->set_flashdata('error', 'Oops! Error occured!');
+					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+				}
+				
+			}
+
+
+			
+
+		} else {
+
+			$this->session->set_flashdata('error', 'You need to login!');
+			redirect('sys/dashboard/login', 'refresh');
+		}
+
+	}
+
+
+	public function delete()		{
+
+		$userdata = $this->session->userdata('admin_logged_in'); //it's pretty clear it's a userdata
+
+		if($userdata)	{
+
+			//FORM VALIDATION
+			$this->form_validation->set_rules('id', 'ID', 'trim|required');   
+		 
+		   if($this->form_validation->run() == FALSE)	{
+
+				$this->session->set_flashdata('error', 'An Error has Occured!');
+				redirect($_SERVER['HTTP_REFERER'], 'refresh');
+
+			} else {
+
+				$key_id = $this->input->post('id'); //the ID of the row
+
+				if($this->candidates_model->delete_candidate($key_id)) {
+					$this->session->set_flashdata('success', 'Deleted!');
+					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+				}
+			}
 
 		} else {
 

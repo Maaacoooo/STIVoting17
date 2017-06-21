@@ -75,6 +75,12 @@ Class Candidates_model extends CI_Model
      */
     function delete_candidate($id) {
 
+        $filename = $this->read_candidate($id)['img'];
+
+        if($filename) {
+            unlink('./uploads/'.$filename); // Deletes the uploaded image if exist
+        }
+
         return $this->db->delete('candidate', array('id' => $id)); 
 
     }
@@ -86,6 +92,29 @@ Class Candidates_model extends CI_Model
      * @return void            returns TRUE if success
      */
     function update_candidate($id) { 
+
+            $filename = $this->read_candidate($id)['img']; //gets the old data 
+
+            //Process Image Upload
+              if($_FILES['img']['name'] != NULL)  {        
+
+                unlink('./uploads/'.$filename); //Deletes the old photo
+
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'gif|jpg|png'; 
+                $config['encrypt_name'] = TRUE;                        
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);         
+                
+                $field_name = "img";
+                $this->upload->do_upload($field_name);
+                $data2 = array('upload_data' => $this->upload->data());
+                foreach ($data2 as $key => $value) {     
+                  $filename = $value['file_name'];
+                }
+                
+            }
       
             $data = array(              
                 'name'      => $this->input->post('name'),  
@@ -93,7 +122,7 @@ Class Candidates_model extends CI_Model
                 'course'    => $this->input->post('course'),  
                 'year'      => $this->input->post('year'),  
                 'party'     => $this->input->post('party'),  
-                'img'       => $this->input->post('img')  
+                'img'       => $filename  
              );
             
             $this->db->where('id', $id);
