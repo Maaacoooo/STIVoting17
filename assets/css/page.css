@@ -222,3 +222,26 @@ div.table-passes div.col {
 	border: 1px solid #cecece;
 	border-collapse: collapse;
 }
+
+
+/**
+ * Custom Badges css
+ */
+
+span.badge-label {
+	color: #fff;
+	font-weight: 300;
+	font-size: 0.8rem;
+	padding: 1px 5px 1px 5px;
+	border-radius: 2px;
+}
+
+
+/**
+ * Custom Candidates Images
+ */
+
+.candidate-img {
+	width: 60px;
+	max-height: 60px;
+}
