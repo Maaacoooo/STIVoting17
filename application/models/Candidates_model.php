@@ -75,7 +75,7 @@ Class Candidates_model extends CI_Model
      */
     function delete_candidate($id) {
 
-        return $this->db->delete('candidates', array('id' => $id)); 
+        return $this->db->delete('candidate', array('id' => $id)); 
 
     }
 
@@ -97,7 +97,7 @@ Class Candidates_model extends CI_Model
              );
             
             $this->db->where('id', $id);
-            return $this->db->update('candidates', $data);          
+            return $this->db->update('candidate', $data);          
         
     }
 
@@ -111,10 +111,44 @@ Class Candidates_model extends CI_Model
             $this->db->where('id', $id);          
             $this->db->limit(1);
 
-            $query = $this->db->get('candidates');
+            $query = $this->db->get('candidate');
 
             return $query->row_array();
     }
+
+    /**
+     * Returns the paginated array of rows 
+     * @param  int      $limit      The limit of the results; defined at the controller
+     * @param  int      $id         the Page ID of the request. 
+     * @return Array        The array of returned rows 
+     */
+    function fetch_candidates($limit, $id) {
+
+            $this->db->select('*');
+            $this->db->limit($limit, (($id-1)*$limit));
+
+            $query = $this->db->get("candidate");
+
+            if ($query->num_rows() > 0) {
+                return $query->result_array();
+            }
+            return false;
+
+    }
+
+    /**
+     * Returns the total number of rows of candidate title
+     * @return int       the total rows
+     */
+    function count_candidates() {
+        return $this->db->count_all("candidate");
+    }
+
+
+
+    //////////////////
+    /// HELPERS /// //
+    //////////////////
 
 
     /**

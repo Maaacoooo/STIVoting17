@@ -116,15 +116,22 @@
                     </tr>
                   </thead>
 
-                  <tbody>
+                  <tbody>                    
+                    <?php if($results):
+                      foreach($results as $row): ?>
                     <tr>
                       <td></td>
-                      <td>asdsadasdassadsads asdasdsad</td>
-                      <td>Eclair</td>
-                      <td>$0.87</td>
-                    </tr>             
+                      <td><?=$row['name']?></td>
+                      <td><?=$row['position'] . ' ' . $row['party'] ?></td>
+                      <td><?=$row['course'] . ' ' . $row['year'] ?></td>
+                    </tr> 
+                    <?php endforeach; 
+                      endif; ?>            
                   </tbody>
                 </table>
+                <div class="right">
+                    <?php foreach ($links as $link) { echo $link; } ?>
+                </div>
                </div><!-- /.col s12 l7 -->
                <div class="col s12 l5">                
                  <div class="card-panel">

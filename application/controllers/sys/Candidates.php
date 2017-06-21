@@ -53,6 +53,32 @@ class Candidates extends CI_Controller {
 			$data['party']		= $this->candidates_model->party();
 			$data['positions']	= $this->candidates_model->positions();
 
+			//Paginated data - Candidate Names				            
+	   		$config['num_links'] = 5;
+			$config['base_url'] = base_url('/sys/candidates/index/');
+			$config["total_rows"] = $this->candidates_model->count_candidates();
+			$config['per_page'] = 10;				
+			$this->load->config('pagination'); //LOAD PAGINATION CONFIG
+
+			$this->pagination->initialize($config);
+		    if($this->uri->segment(4)){
+		       $page = ($this->uri->segment(4)) ;
+		  	}	else 	{
+		       $page = 1;		               
+		    }
+
+		    $data["results"] = $this->candidates_model->fetch_candidates($config["per_page"], $page);
+		    $str_links = $this->pagination->create_links();
+		    $data["links"] = explode('&nbsp;',$str_links );
+
+		    //ITEM NUMBERING
+		    $data['per_page'] = $config['per_page'];
+		    $data['page'] = $page;
+
+		    //GET TOTAL RESULT
+		    $data['total_result'] = $config["total_rows"];
+		    //END PAGINATION
+
 			//Form Validation for Modal
 			$this->form_validation->set_rules('name', 'Name', 'trim|required'); 
 			$this->form_validation->set_rules('party', 'Partylist', 'trim|required'); 
