@@ -153,7 +153,17 @@ Class Candidates_model extends CI_Model
      */
     function fetch_candidates($limit, $id) {
 
-            $this->db->select('*');
+            $this->db->select('
+                candidate.name,
+                candidate.party,
+                candidate.year,
+                candidate.position,
+                candidate.img,
+                candidate.id,
+                candidate.course,
+                party.color
+                ');
+            $this->db->join('party', 'party.title = candidate.party');
             $this->db->limit($limit, (($id-1)*$limit));
 
             $query = $this->db->get("candidate");

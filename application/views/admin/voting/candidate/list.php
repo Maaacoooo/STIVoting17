@@ -129,7 +129,7 @@
                         </a>
                       </td>
                       <td><a href="<?=base_url('sys/candidates/update/' . $row['id'])?>"><?=$row['name']?></a></td>
-                      <td><?=$row['position']?> <span class="badge-label pink"><?=$row['party']?></span></td>
+                      <td><?=$row['position']?> <span class="badge-label <?=$row['color']?>"><?=$row['party']?></span></td>
                       <td><?=$row['course'] . ' ' . $row['year'] ?></td>
                     </tr> 
                     <?php endforeach; 
