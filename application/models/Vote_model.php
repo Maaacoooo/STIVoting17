@@ -163,30 +163,7 @@ Class Vote_model extends CI_Model
         $this->db->empty_table('votes');
     }
 
-<<<<<<< HEAD
-    // CREATE DATA ////////////////////////////////////////////////////////////////////
-    
-    function create() { 
-      
-            $data = array(              
-                'title' => $this->input->post('value')  
-             );
-       
-       return $this->db->insert($this->encrypt->decode($this->input->post('key')), $data);          
-        
-    }
 
-// DELETE DATA ////////////////////////////////////////////////////////////////////
-
-    function delete() {
-
-          return $this->db->delete($this->encrypt->decode($this->input->post('key')), array('id' => $this->encrypt->decode($this->input->post('id')))); 
-
-    }
-
-// UPDATE DATA ////////////////////////////////////////////////////////////////////
-=======
->>>>>>> 89778c2949d12bc9c19cf6900a0b75a1a8ac6b0e
    
 
 

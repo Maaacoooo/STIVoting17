@@ -116,28 +116,52 @@ Class Candidates_model extends CI_Model
     }
 
 
+    /**
+     * Returns the complete Array of row items of 'years' table
+     * @return String Arr   The array of row items of the 'years' table
+     */
+    function years() {
+
+            $this->db->select('*');
+            $query = $this->db->get('year');
+
+            return $query->result_array();
+
+    }
 
 
-// DELETE DATA ////////////////////////////////////////////////////////////////////
+    /**
+     * Returns the complete Array of row items of 'course' table
+     * @return String Arr   The array of row items of the 'course' table
+     */
+    function courses() {
 
-    function delete() {
+            $this->db->select('*');
+            $query = $this->db->get('course');
 
-          return $this->db->delete($this->encrypt->decode($this->input->post('key')), array('id' => $this->encrypt->decode($this->input->post('id')))); 
+            return $query->result_array();
 
     }
 
-// UPDATE DATA ////////////////////////////////////////////////////////////////////
-   
-   function update(){
 
-            $data = array(              
-                'title' => $this->input->post('value')  
-             );
 
-          $this->db->where('id', $this->encrypt->decode($this->input->post('id')));
-          return $this->db->update($this->encrypt->decode($this->input->post('key')), $data);
+    /**
+     * Returns the complete Array of row items of 'party' table
+     * @return String Arr   The array of row items of the 'party' table
+     */
+    function party() {
+
+            $this->db->select('*');
+            $query = $this->db->get('party');
+
+            return $query->result_array();
 
     }
+
+    
+
+
+
 
 
 }
