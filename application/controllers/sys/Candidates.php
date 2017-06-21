@@ -31,7 +31,7 @@ class Candidates extends CI_Controller {
 	public function __construct()	{
 		parent::__construct();		
        $this->load->model('user_model');
-       $this->load->model('vote_model');
+       $this->load->model('candidates_model');
 	}	
 
 
@@ -42,31 +42,31 @@ class Candidates extends CI_Controller {
 
 		if($userdata)	{
 
-			$data['title'] = 'Candidates';
+			$data['title'] 		= 'Candidates';
 			$data['site_title'] = APP_NAME;
-			$data['user'] = $this->user_model->userdetails($userdata['username']); //fetches users record
+			$data['user'] 		= $this->user_model->userdetails($userdata['username']); //fetches users record
 
 
 			//Page Data 
-			$data['passes'] = $this->vote_model->fetch_votepass('all'); //fetches all data
-			$data['total_passes'] = $this->vote_model->count_votepass('all');
-			$data['total_passUsed'] = $this->vote_model->count_votepass(1);
+			$data['years']		= $this->candidates_model->years();
+			$data['courses']	= $this->candidates_model->courses();
+			$data['party']		= $this->candidates_model->party();
+			$data['positions']	= $this->candidates_model->positions();
 
 			//Form Validation for Modal
-			$this->form_validation->set_rules('passes', 'Number of Vote Pass', 'trim|required|less_than_equal_to[5000]|greater_than[0]'); 
+			$this->form_validation->set_rules('name', 'Name', 'trim|required'); 
+			$this->form_validation->set_rules('party', 'Partylist', 'trim|required'); 
+			$this->form_validation->set_rules('course', 'Courses', 'trim|required'); 
+			$this->form_validation->set_rules('year', 'Year', 'trim|required'); 
 
 			if($this->form_validation->run() == FALSE)	{
 				$this->load->view('admin/voting/candidates', $data);
-			} else {
-
-				//Clear Votes and Vote Pass Tables
-				$this->vote_model->clear_votekeys();
-				$this->vote_model->clear_votes();
+			} else {			
 
 				//Proceed saving 				
-				if($this->vote_model->generate_key($this->input->post('passes'))) {			
+				if($this->candidates_model->create_candidate()) {			
 			
-					$this->session->set_flashdata('success', 'Success! Voting Passes Generated!');
+					$this->session->set_flashdata('success', 'Succes! Candidate registered!');
 					redirect($_SERVER['HTTP_REFERER'], 'refresh');
 				} else {
 					//failure

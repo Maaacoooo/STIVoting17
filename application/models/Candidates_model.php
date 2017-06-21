@@ -63,8 +63,9 @@ Class Candidates_model extends CI_Model
                 'img'       => $filename  
              );
        
-            return $this->db->insert('candidates', $data);          
-        
+            return $this->db->insert('candidate', $data);          
+            
+
     }
     
     /**
@@ -95,7 +96,7 @@ Class Candidates_model extends CI_Model
                 'img'       => $this->input->post('img')  
              );
             
-            $this->db->where('id', $id)
+            $this->db->where('id', $id);
             return $this->db->update('candidates', $data);          
         
     }
@@ -159,6 +160,18 @@ Class Candidates_model extends CI_Model
     }
 
     
+    /**
+     * Returns the complete Array of row items of position table
+     * @return String Arr   The array of row items of the position table
+     */
+    function positions() {
+
+            $this->db->select('*');
+            $query = $this->db->get('position');
+
+            return $query->result_array();
+
+    }
 
 
 

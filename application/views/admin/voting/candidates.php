@@ -109,79 +109,127 @@
                  <table class="striped bordered highlight">
                   <thead>
                     <tr>
+                        <th></th>
                         <th>Name</th>
-                        <th>Item Name</th>
-                        <th>Item Price</th>
+                        <th>Position &middot; Party</th>
+                        <th>Course &middot; Year</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     <tr>
-                      <td>Alvin</td>
+                      <td></td>
+                      <td>asdsadasdassadsads asdasdsad</td>
                       <td>Eclair</td>
                       <td>$0.87</td>
-                    </tr>
-                    <tr>
-                      <td>Alan</td>
-                      <td>Jellybean</td>
-                      <td>$3.76</td>
-                    </tr>
-                    <tr>
-                      <td>Jonathan</td>
-                      <td>Lollipop</td>
-                      <td>$7.00</td>
-                    </tr>
+                    </tr>             
                   </tbody>
                 </table>
                </div><!-- /.col s12 l7 -->
-               <div class="col s12 l5 card">
-                <h6 class="strong">Register Candidate</h6><!-- /.strong -->
-                 <form>
-                   <div class="row">
-                     <div class="input-field col s12 l9">
-                        <input id="name" type="text" class="validate">
-                        <label for="name">Full Name</label>
-                     </div>
-                     <div class="input-field col s12 l3">
-                       <div class="file-field input-field">
-                        <div class="btn">
-                          <span>IMG</span>
-                          <input type="file">
-                        </div>
-                        <div class="file-path-wrapper">
-                          <input class="file-path validate" type="text">
-                        </div>
-                      </div>
-                     </div><!-- /.input-field col s12 l3 -->
-                   </div><!-- /.row -->
-                   <div class="row">
-                     <div class="input-field col s6">
-                        <input type="text" name="" id="" class="validate" />
-                        <label for=""></label>
-                      </div><!-- /.input-field col s6 -->
-                     <div class="input-field col s6">
-                       <input type="text" name="" id="" class="validate" />
-                       <label for=""></label>
-                     </div><!-- /.input-field col s6 -->
-                   </div><!-- /.row -->
-                   <div class="row">
-                     <div class="input-field col s6">
-                       <input type="text" name="" id="" class="validate" />
-                       <label for=""></label>
-                     </div><!-- /.input-field col s6 -->
-                     <div class="input-field col s6">
-                       <input type="text" name="" id="" class="validate" />
-                       <label for=""></label>
-                     </div><!-- /.input-field col s6 -->
-                   </div><!-- /.row -->
-                   <div class="row">
-                      <div class="col s12">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                          <i class="mdi-alert-warning right"></i>
-                        </button>
-                      </div><!-- /.col s12 -->
-                   </div><!-- /.row -->
-                 </form>
+               <div class="col s12 l5">                
+                 <div class="card-panel">
+                   <div class="card-content">
+                     <h6 class="strong">Register Candidate</h6><!-- /.strong -->
+                     <?=form_open_multipart('sys/candidates')?>
+                       <div class="row">
+                         <div class="input-field col s12 l9">
+                            <input id="name" name="name" type="text" class="validate" required>
+                            <label for="name">Full Name</label>
+                         </div>
+                         <div class="input-field col s12 l3">
+                           <div class="file-field input-field">
+                            <div class="btn">
+                              <span>IMG</span>
+                              <input type="file" name="img">
+                            </div>
+                            <div class="file-path-wrapper">
+                              <input class="file-path validate" type="text">
+                            </div>
+                          </div>
+                         </div><!-- /.input-field col s12 l3 -->
+                       </div><!-- /.row -->
+                       <div class="row">
+                         <div class="input-field col s6">                        
+                            <div class="select-wrapper">  
+                              <select class="browser-default" name="year" required>
+                                  <option value="" disabled="" selected="">Select Year</option>
+                                  <?php 
+                                    if($years):
+                                    foreach($years as $year):
+                                  ?>
+                                  <option value="<?=$year['title']?>"><?=$year['title']?></option>
+                                  <?php
+                                    endforeach;
+                                    endif;
+                                  ?>
+                              </select>
+                            </div><!-- /.select-wrapper -->
+                            <label>Year Level</label>
+                          </div><!-- /.input-field col s6 -->
+                         <div class="input-field col s6">
+                           <div class="select-wrapper">  
+                              <select class="browser-default" name="course" required>
+                                  <option value="" disabled="" selected="">Select Course</option>
+                                  <?php 
+                                    if($courses):
+                                    foreach($courses as $course):
+                                  ?>
+                                  <option value="<?=$course['title']?>"><?=$course['title']?></option>
+                                  <?php
+                                    endforeach;
+                                    endif;
+                                  ?>
+                              </select>
+                            </div><!-- /.select-wrapper -->
+                            <label>Course</label>
+                         </div><!-- /.input-field col s6 -->
+                       </div><!-- /.row -->
+                       <div class="row">
+                         <div class="input-field col s6">
+                           <div class="select-wrapper">  
+                              <select class="browser-default" name="position" required>
+                                  <option value="" disabled="" selected="">Position Desired</option>
+                                  <?php 
+                                    if($positions):
+                                    foreach($positions as $position):
+                                  ?>
+                                  <option value="<?=$position['title']?>"><?=$position['title']?></option>
+                                  <?php
+                                    endforeach;
+                                    endif;
+                                  ?>
+                              </select>
+                            </div><!-- /.select-wrapper -->
+                            <label>Position</label>
+                         </div><!-- /.input-field col s6 -->
+                         <div class="input-field col s6">
+                           <div class="select-wrapper">  
+                              <select class="browser-default" name="party" required>
+                                  <option value="" disabled="" selected="">Party Desired</option>
+                                  <?php 
+                                    if($party):
+                                    foreach($party as $par):
+                                  ?>
+                                  <option value="<?=$par['title']?>"><?=$par['title']?></option>
+                                  <?php
+                                    endforeach;
+                                    endif;
+                                  ?>
+                              </select>
+                            </div><!-- /.select-wrapper -->
+                            <label>Partylist</label>
+                         </div><!-- /.input-field col s6 -->
+                       </div><!-- /.row -->
+                       <div class="row">
+                          <div class="input-field col s12">
+                                  <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                                    <i class="mdi-content-send right"></i>
+                                  </button>
+                                </div>
+                       </div><!-- /.row -->
+                     <?=form_close()?>
+                   </div><!-- /.card-content -->
+                 </div><!-- /.card-panel -->
                </div><!-- /.col s12 l5 -->
              </div><!-- /.row -->
            </div><!-- /.section --> 
