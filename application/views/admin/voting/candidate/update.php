@@ -62,8 +62,8 @@
               <div class="col s12 m12 l12">
                 <h5 class="breadcrumbs-title"><?=$title?></h5>
                 <ol class="breadcrumb">
-                    <li><a href="<?=base_url()?>">Dashboard</a></li>
-                    <li><a href="<?=base_url()?>">Pages</a></li>
+                    <li><a href="<?=base_url('sys')?>">Voting System</a></li>
+                    <li><a href="<?=base_url('sys/candidates/')?>">Candidates</a></li>
                     <li class="active"><?=$title?></li>
                 </ol>
               </div>
@@ -103,44 +103,32 @@
               </div>
             </div>
             
-          <div class="section">
-             <div class="row">
-               <div class="col s12 l7">
-                 <table class="striped bordered highlight">
-                  <thead>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Position &middot; Party</th>
-                        <th>Course &middot; Year</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>                    
-                    <?php if($results):
-                      foreach($results as $row): ?>
-                    <tr>
-                      <td></td>
-                      <td><?=$row['name']?></td>
-                      <td><?=$row['position'] . ' ' . $row['party'] ?></td>
-                      <td><?=$row['course'] . ' ' . $row['year'] ?></td>
-                    </tr> 
-                    <?php endforeach; 
-                      endif; ?>            
-                  </tbody>
-                </table>
-                <div class="right">
-                    <?php foreach ($links as $link) { echo $link; } ?>
-                </div>
-               </div><!-- /.col s12 l7 -->
-               <div class="col s12 l5">                
-                 <div class="card-panel">
-                   <div class="card-content">
-                     <h6 class="strong">Register Candidate</h6><!-- /.strong -->
-                     <?=form_open_multipart('sys/candidates')?>
+            <div class="row card">
+              <div class="col s12 l3">                
+                  <div class="card-content">
+                    <?php if($info['img']): ?>
+                      <img src="<?=base_url('uploads/'.$info['img'])?>" alt="" class="responsive-img">
+                    <?php else: ?>
+                      <img src="<?=base_url('assets/images/no_image.gif')?>" alt="" class="responsive-img valign">
+                    <?php endif; ?>
+                  </div><!-- /.card-content -->           
+              </div><!-- /.col s12 l4 card -->
+              <div class="col s12 l9">    
+                      <div class="row">
+                                   <div class="col s12">
+                                     <div class="card light-blue">
+                                       <div class="card-content">
+                                         <p class="white-text">
+                                           You are updating the candidate information.
+                                         </p><!-- /.white-text -->
+                                       </div><!-- /.card-content -->
+                                     </div><!-- /.card light-blue -->
+                                   </div><!-- /.col s12 -->
+                                 </div><!-- /.row -->           
+                  <?=form_open_multipart('sys/candidates', array('class' => 'card-content'))?>
                        <div class="row">
                          <div class="input-field col s12 l9">
-                            <input id="name" name="name" type="text" class="validate" required>
+                            <input id="name" name="name" type="text" class="validate" value="<?=$info['name']?>" required>
                             <label for="name">Full Name</label>
                          </div>
                          <div class="input-field col s12 l3">
@@ -158,13 +146,12 @@
                        <div class="row">
                          <div class="input-field col s6">                        
                             <div class="select-wrapper">  
-                              <select class="browser-default" name="year" required>
-                                  <option value="" disabled="" selected="">Select Year</option>
+                              <select class="browser-default" name="year" required>                                  
                                   <?php 
                                     if($years):
                                     foreach($years as $year):
                                   ?>
-                                  <option value="<?=$year['title']?>"><?=$year['title']?></option>
+                                  <option value="<?=$year['title']?>" <?php if($year['title']==$info['year'])echo'selected';?>><?=$year['title']?></option>
                                   <?php
                                     endforeach;
                                     endif;
@@ -175,13 +162,12 @@
                           </div><!-- /.input-field col s6 -->
                          <div class="input-field col s6">
                            <div class="select-wrapper">  
-                              <select class="browser-default" name="course" required>
-                                  <option value="" disabled="" selected="">Select Course</option>
+                              <select class="browser-default" name="course" required>                                  
                                   <?php 
                                     if($courses):
                                     foreach($courses as $course):
                                   ?>
-                                  <option value="<?=$course['title']?>"><?=$course['title']?></option>
+                                  <option value="<?=$course['title']?>" <?php if($course['title']==$info['course'])echo'selected';?>><?=$course['title']?></option>
                                   <?php
                                     endforeach;
                                     endif;
@@ -194,13 +180,12 @@
                        <div class="row">
                          <div class="input-field col s6">
                            <div class="select-wrapper">  
-                              <select class="browser-default" name="position" required>
-                                  <option value="" disabled="" selected="">Position Desired</option>
+                              <select class="browser-default" name="position" required>                                  
                                   <?php 
                                     if($positions):
                                     foreach($positions as $position):
                                   ?>
-                                  <option value="<?=$position['title']?>"><?=$position['title']?></option>
+                                  <option value="<?=$position['title']?>" <?php if($position['title']==$info['position'])echo'selected';?>><?=$position['title']?></option>
                                   <?php
                                     endforeach;
                                     endif;
@@ -211,13 +196,12 @@
                          </div><!-- /.input-field col s6 -->
                          <div class="input-field col s6">
                            <div class="select-wrapper">  
-                              <select class="browser-default" name="party" required>
-                                  <option value="" disabled="" selected="">Party Desired</option>
+                              <select class="browser-default" name="party" required>                             
                                   <?php 
                                     if($party):
                                     foreach($party as $par):
                                   ?>
-                                  <option value="<?=$par['title']?>"><?=$par['title']?></option>
+                                  <option value="<?=$par['title']?>" <?php if($par['title']==$info['party'])echo'selected';?>><?=$par['title']?></option>
                                   <?php
                                     endforeach;
                                     endif;
@@ -229,17 +213,16 @@
                        </div><!-- /.row -->
                        <div class="row">
                           <div class="input-field col s12">
-                                  <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
-                                    <i class="mdi-content-send right"></i>
+                                  <button class="btn amber waves-effect waves-light right" type="submit" name="action">Update Candidate
+                                    <i class="mdi-editor-mode-edit left"></i>
                                   </button>
                                 </div>
                        </div><!-- /.row -->
-                     <?=form_close()?>
-                   </div><!-- /.card-content -->
-                 </div><!-- /.card-panel -->
-               </div><!-- /.col s12 l5 -->
-             </div><!-- /.row -->
-           </div><!-- /.section --> 
+                      <?=$this->encryption->encrypt('My secret message')?> 
+                      <input type="hidden" name="id"  />
+                                  
+              </div><!-- /.col s12 l8 -->
+            </div><!-- /.row -->
          
           </div>
         </div>
