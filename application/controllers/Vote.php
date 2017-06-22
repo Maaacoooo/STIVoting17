@@ -42,28 +42,33 @@ class Vote extends CI_Controller {
 
 			$data['positions'] = $this->candidates_model->positions();
 
-			$data['test'] = array( 'positions',
+			$data['test'] = array(
 								array(
 								'title' => 'position title 1',
-								'candidates' => array(array(
-																		'name' 	=> 'candidate name',
-																		'img'	=> 'img link.png',
-																		'party'	=> 'party list'	
-																	))
-								),
+								'candidates' => array(
+													array(
+														'name' 	=> 'candidate name',
+														'img'	=> 'img link.png',
+														'party'	=> 'party list'	
+																	)
+												)
+								)
 							);
 
 			//var_dump($data['positions']);
 			//echo '<br/> <br/>';
-			var_dump($data['test']);
+			//var_dump($data['test']);
 			
 			
 			foreach($data['test'] as $test) {
+
 				echo $test['title'];
-				echo '<br/>'
+				echo '<br/>';
+				
 				foreach($test['candidates'] as $can) {
-					echo $can['name'] . ' - ' . $can['party'] . ' - ' . $can['img'];
+					echo $can['name'];
 				}
+				
 			} 
 
 			//$this->load->view('vote/voting_page', $data);
