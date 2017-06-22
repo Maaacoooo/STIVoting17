@@ -29,6 +29,7 @@ class Vote extends CI_Controller {
 	public function __construct()	{
 		parent::__construct();		
        $this->load->model('vote_model');
+       $this->load->model('candidates_model');
 	}	
 
 
@@ -38,7 +39,34 @@ class Vote extends CI_Controller {
 
 			$data['title'] = 'Vote now!';
 			$data['site_title'] = APP_NAME;
-			$this->load->view('vote/voting_page', $data);
+
+			$data['positions'] = $this->candidates_model->positions();
+
+			$data['test'] = array( 'positions',
+								array(
+								'title' => 'position title 1',
+								'candidates' => array(array(
+																		'name' 	=> 'candidate name',
+																		'img'	=> 'img link.png',
+																		'party'	=> 'party list'	
+																	))
+								),
+							);
+
+			//var_dump($data['positions']);
+			//echo '<br/> <br/>';
+			var_dump($data['test']);
+			
+			
+			foreach($data['test'] as $test) {
+				echo $test['title'];
+				echo '<br/>'
+				foreach($test['candidates'] as $can) {
+					echo $can['name'] . ' - ' . $can['party'] . ' - ' . $can['img'];
+				}
+			} 
+
+			//$this->load->view('vote/voting_page', $data);
 
 		} else {
 

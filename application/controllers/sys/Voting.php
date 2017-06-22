@@ -132,5 +132,11 @@ class Voting extends CI_Controller {
 
 
 
+	public function results() {
+		
+	}
+
+
+
 
 }

@@ -84,7 +84,7 @@
             <?php } ?>  
         </div>
         
-        <?php for($x=1;$x<=2;$x++): ?>
+        <?php for($x=1;$x<=1;$x++): ?>
         <div class="section card-panel">
               <h4 class="header">President <?=$x?></h4>
               <div class="row">
@@ -108,6 +108,34 @@
               </div>
           </div>
           <?php endfor; ?>
+
+
+          <?php if($positions):
+              foreach($positions as $pos): ?>
+            <div class="section card-panel">
+              <h4 class="header"><?=$pos['title']?></h4>
+              <div class="row">
+                <div class="col s12 l12">                 
+                  <ul class="collection">
+                  <?php for($y=1;$y<=1;$y++): ?>
+                    <li class="collection-item avatar">
+                      <img src="<?=base_url('assets/images/avatar.jpg')?>" alt="" class="circle">
+                      <span class="title">Maco Super Cortes</span>
+                      <p>First Line <?=$y?>
+                        <br> Second Line
+                      </p>
+                      <div class="secondary-content">
+                        <input class="with-gap" name="<?=$x?>" type="radio" id="<?=$x?>test<?=$y?>">
+                        <label for="<?=$x?>test<?=$y?>">Vote Me!</label>
+                      </div>
+                    </li>                  
+                  <?php endfor; ?>
+                  </ul>
+                </div>         
+              </div>
+            </div>
+          <?php endforeach;
+              endif; ?>
 
 
         <div class="row valign-wrapper">     
