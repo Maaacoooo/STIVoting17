@@ -40,38 +40,35 @@ class Vote extends CI_Controller {
 			$data['title'] = 'Vote now!';
 			$data['site_title'] = APP_NAME;
 
-			$data['positions'] = $this->candidates_model->positions();
+			$data['positions'] = $this->candidates_model->fetch_votable();
 
-			$data['test'] = array(
-								array(
-								'title' => 'position title 1',
-								'candidates' => array(
-													array(
-														'name' 	=> 'candidate name',
-														'img'	=> 'img link.png',
-														'party'	=> 'party list'	
-																	)
-												)
-								)
-							);
+			$this->form_validation->set_rules('vote[]', 'Vote', 'trim|required');   
 
-			//var_dump($data['positions']);
-			//echo '<br/> <br/>';
-			//var_dump($data['test']);
-			
-			
-			foreach($data['test'] as $test) {
+			if($this->form_validation->run() == FALSE)	{
 
-				echo $test['title'];
-				echo '<br/>';
-				
-				foreach($test['candidates'] as $can) {
-					echo $can['name'];
+				$this->load->view('vote/voting_page', $data); 
+
+			} else {
+
+				$vote = $this->input->post('vote[]');
+				$user = $this->session->userdata('voter_logged_in')['votepass'];
+
+				if($this->vote_model->submit_vote($vote, $user)) {
+					//Change vote pass status
+					$this->vote_model->used_votepass($user);
+					//Logs out user 
+					$this->session->unset_userdata('voter_logged_in');
+					//redirect
+					redirect('vote/success', 'refresh');
+				} else {					
+					//Logs out user 
+					$this->session->unset_userdata('voter_logged_in');
+					//redirect
+					redirect('vote/error', 'refresh');
 				}
 				
-			} 
-
-			//$this->load->view('vote/voting_page', $data);
+				//redirect('vote/instructions', 'refresh');
+			}
 
 		} else {
 
@@ -86,6 +83,14 @@ class Vote extends CI_Controller {
 		$data['title'] = 'Vote Success!';
 		$data['site_title'] = APP_NAME;
 		$this->load->view('vote/vote_success', $data);
+
+	}
+
+	public function error()		{
+
+		$data['title'] = 'Error Occured!';
+		$data['site_title'] = APP_NAME;
+		$this->load->view('vote/vote_error', $data);
 
 	}
 
@@ -107,7 +112,7 @@ class Vote extends CI_Controller {
 	
 
 	public function logout() {
-		$this->session->set_flashdata('success', 'You sucessfuly logged out!');
+		$this->session->set_flashdata('success', 'Nice! You can still vote later!');
 		$this->session->unset_userdata('voter_logged_in');		  
 		redirect('login', 'refresh');
 	}

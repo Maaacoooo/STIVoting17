@@ -82,34 +82,11 @@
                  <span class="white-text"><i class="mdi-alert-warning tiny"></i> <?php echo validation_errors(); ?></span> 
               </div>               
             <?php } ?>  
-        </div>
+        </div>      
+
+
         
-        <?php for($x=1;$x<=1;$x++): ?>
-        <div class="section card-panel">
-              <h4 class="header">President <?=$x?></h4>
-              <div class="row">
-                <div class="col s12 l12">                 
-                  <ul class="collection">
-                  <?php for($y=1;$y<=3;$y++): ?>
-                    <li class="collection-item avatar">
-                      <img src="<?=base_url('assets/images/avatar.jpg')?>" alt="" class="circle">
-                      <span class="title">Maco Super Cortes</span>
-                      <p>First Line <?=$y?>
-                        <br> Second Line
-                      </p>
-                      <div class="secondary-content">
-                        <input class="with-gap" name="<?=$x?>" type="radio" id="<?=$x?>test<?=$y?>">
-                        <label for="<?=$x?>test<?=$y?>">Vote Me!</label>
-                      </div>
-                    </li>                  
-                  <?php endfor; ?>
-                  </ul>
-                </div>         
-              </div>
-          </div>
-          <?php endfor; ?>
-
-
+       <?=form_open('vote')?> 
           <?php if($positions):
               foreach($positions as $pos): ?>
             <div class="section card-panel">
@@ -117,19 +94,27 @@
               <div class="row">
                 <div class="col s12 l12">                 
                   <ul class="collection">
-                  <?php for($y=1;$y<=1;$y++): ?>
+                  <?php 
+                    if($pos['candidates']):
+                    foreach($pos['candidates'] as $can): ?>
                     <li class="collection-item avatar">
-                      <img src="<?=base_url('assets/images/avatar.jpg')?>" alt="" class="circle">
-                      <span class="title">Maco Super Cortes</span>
-                      <p>First Line <?=$y?>
-                        <br> Second Line
+                      <?php if($can['img']): ?>
+                          <img src="<?=base_url('uploads/'.$can['img'])?>" alt="" class="circle valign candidate-img">
+                        <?php else: ?>
+                          <img src="<?=base_url('assets/images/no_image.gif')?>" alt="" class="circle valign candidate-img">
+                        <?php endif; ?>
+                      <span class="title"><?=$can['name']?></span>
+                      <p> <span class="badge-label <?=$can['color']?>"><?=$can['party']?></span>
+                        <br> <?=$can['course'] . ' ' . $can['year']?>
                       </p>
                       <div class="secondary-content">
-                        <input class="with-gap" name="<?=$x?>" type="radio" id="<?=$x?>test<?=$y?>">
-                        <label for="<?=$x?>test<?=$y?>">Vote Me!</label>
+                        <input class="with-gap" name="vote[<?=cleancrypt($pos['title'])?>]" type="radio" id="<?=$can['id']?>" value="<?=cleancrypt($can['id'])?>" required>
+                        <label for="<?=$can['id']?>">Vote Me!</label>
                       </div>
                     </li>                  
-                  <?php endfor; ?>
+                  <?php 
+                    endforeach; 
+                    endif;  ?>
                   </ul>
                 </div>         
               </div>
@@ -140,8 +125,10 @@
 
         <div class="row valign-wrapper">     
             <button type="submit" class="btn waves-effect green darken-1 col s5 offset-s3">Submit Vote</button>    
-            <p class="col s4"><a href="#">Submit Later</a></p><!-- /.center -->
+            <p class="col s4"><a href="<?=base_url('vote/logout')?>">Submit Later</a></p><!-- /.center -->
         </div>
+
+        <?=form_close()?>
 
  
       <?php $this->load->view('inc/copy_footer');?>

@@ -85,7 +85,7 @@ Class Vote_model extends CI_Model
     }
 
     /**
-     * [generate_key description]
+     * This Generates the vote Key Passes
      * @param  int      $key     the number of keys to be generated
      * @return boolean           it actually returns TRUE all the time. This could be VOID.
      */
@@ -110,8 +110,10 @@ Class Vote_model extends CI_Model
     }
 
     /** 
+     * A multipurpose function used in printing and admin panel
+     * Returns the requested vote keys 
      * @param [String] $[str] [< 'Identifier of the query; all' = return all;>]
-     * @return [Integer] [<Returns an Integer>]
+     * @return [Integer]    Returns the array of vote keys
      */
     
     function fetch_votepass($str) {
@@ -129,6 +131,8 @@ Class Vote_model extends CI_Model
     }
 
     /** 
+     * A multipurpose function used in printing and admin panel
+     * Returns the number of rows of the requested vote keys 
      * @param [String] $[str] [< 'Identifier of the query; all' = return all;>]
      * @return [Integer] [<Returns an Integer>]
      */
@@ -142,6 +146,15 @@ Class Vote_model extends CI_Model
             return $this->db->count_all_results('vote_keys');
         }
 
+    }
+
+
+    function used_votepass($key) {
+        $data = array(            
+                'is_used'    => 1  
+             );
+        $this->db->where('key', $key);
+        return $this->db->update('vote_keys', $data);     
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -161,6 +174,32 @@ Class Vote_model extends CI_Model
      */
     function clear_votes() {
         $this->db->empty_table('votes');
+    }
+
+
+    /**
+     * This processes the votes
+     * @param  String Array $vote  The Array of votes
+     * @param  String       $user  The votepass userdata 
+     * @return Boolean     returns TRUE if success
+     */
+    function submit_vote($vote, $user) {
+        
+       
+       foreach ($vote as $key => $value) {
+            $data = array(              
+                'candidate_id' => $value,
+                'vote_pass'    => $user 
+             );
+
+             if(!$this->db->insert('votes', $data)) {
+                return FALSE;
+             }
+        }
+
+        return TRUE;
+            
+
     }
 
 

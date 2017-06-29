@@ -240,9 +240,62 @@ Class Candidates_model extends CI_Model
     function positions() {
 
             $this->db->select('*');
+            $this->db->order_by('placeorder', 'ASC');
             $query = $this->db->get('position');
 
             return $query->result_array();
+
+    }
+
+
+    /**
+     * Returns all the Position with the corresponding candidates
+     * @return String Arr - Multi-Dimension Array - the array of positions with 
+     * the corresponding array of candidates
+     *
+     */
+    function fetch_votable() {
+
+            //Fetches all available positions
+            $this->db->select('*');      
+            $this->db->order_by('placeorder', 'ASC');
+            $query  = $this->db->get('position');
+            $result = $query->result_array();            
+            
+            //the loop of the main array
+            //the array of positions
+            foreach($result as $position) {
+
+                //Sets the position title
+                $data['title'] = $position['title'];        
+
+                $data['candidates'] = ''; //default value if null
+                
+                //Fetches candidates according to its position
+                $this->db->select('
+                candidate.name,
+                candidate.party,
+                candidate.year,
+                candidate.position,
+                candidate.img,
+                candidate.id,
+                candidate.course,
+                party.color
+                ');
+                $this->db->join('party', 'party.title = candidate.party');              
+                $this->db->where('position', $position['title']);
+                $query_candidate    = $this->db->get('candidate');
+                $candidate_result   = $query_candidate->result_array();
+
+                $data['candidates'] = $candidate_result;        
+
+
+                //build the overall array
+                $dataset[] = $data;
+               
+            }           
+
+            return $dataset;
 
     }
 
