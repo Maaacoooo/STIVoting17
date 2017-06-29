@@ -154,7 +154,7 @@
               <div class="col s12">
                 <h6 class="white-text"><span class="strong">Claimed Passes</span> <span class="right"><?=$total_passUsed?>/<?=$total_passes?></span></h6>
                   <div class="progress">
-                    <div class="determinate" style="width: <?=(($total_passUsed / $total_passes)*100)?>%"></div>   
+                    <div class="determinate" style="width: <?=round(($total_passUsed / $total_passes)*100)?>%"></div>   
                   </div>
               </div><!-- /.col s12 -->
             </div><!-- /.row -->
