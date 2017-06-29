@@ -251,20 +251,20 @@ Class Candidates_model extends CI_Model
     /**
      * Returns all the Position with the corresponding candidates
      * @return String Arr - Multi-Dimension Array - the array of positions with 
-     * the corresponding array of candidates
+     * the corresponding array of candidates, with the number of votes
      *
      */
     function fetch_votable() {
 
             //Fetches all available positions
             $this->db->select('*');      
+            //$this->db->limit(2);
             $this->db->order_by('placeorder', 'ASC');
-            $query  = $this->db->get('position');
-            $result = $query->result_array();            
+            $query  = $this->db->get('position');         
             
             //the loop of the main array
             //the array of positions
-            foreach($result as $position) {
+            foreach($query->result_array() as $position) {
 
                 //Sets the position title
                 $data['title'] = $position['title'];        
@@ -285,13 +285,33 @@ Class Candidates_model extends CI_Model
                 $this->db->join('party', 'party.title = candidate.party');              
                 $this->db->where('position', $position['title']);
                 $query_candidate    = $this->db->get('candidate');
-                $candidate_result   = $query_candidate->result_array();
+              
+                foreach($query_candidate->result_array() as $can) {
+                    //candidate information
+                    $candid['name'] =  $can['name'];
+                    $candid['party'] =  $can['party'];
+                    $candid['year'] =  $can['year'];
+                    $candid['position'] =  $can['position'];
+                    $candid['img'] =  $can['img'];
+                    $candid['course'] =  $can['course'];
+                    $candid['color'] =  $can['color'];                    
+                    $candid['id'] =  $can['id'];
 
-                $data['candidates'] = $candidate_result;        
+                    //count votes
+                    $this->db->where('candidate_id', cleancrypt($can['id']));
+                    $candid['votes'] =  $this->db->count_all_results('votes');
+
+                    //compile array
+                    $candid_arr[] = $candid;                    
+                    $data['candidates'] = $candid_arr;
+                }  
+                    $candid_arr = array(); //resets array
+                
 
 
                 //build the overall array
                 $dataset[] = $data;
+                
                
             }           
 
