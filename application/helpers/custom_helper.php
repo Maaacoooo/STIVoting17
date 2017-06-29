@@ -9,8 +9,8 @@
 
     /**
      * This provides an encrypted and/or unreadable data.
-     * @param  [type] $str [description]
-     * @return [type]      [description]
+     * @param  String   $str    Any string to be encrypted.
+     * @return String           Encrypted string. U NO SAY????
      */
     function cleancrypt($str) {
 
@@ -18,6 +18,22 @@
     	$new_str 	= substr($crypt_str, 0, 6); //limits the string
 
     	return $new_str;
+    }
+
+
+    /**
+     * Simply checks the existence of the file
+     * @param  String   $file   The file name.
+     * @return Boolean          Returns true if exists. U NO SAY????
+     */
+    function filexist($file) {
+
+        if(file_exists('./uploads/'.$file)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+
     }
 
 

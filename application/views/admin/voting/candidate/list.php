@@ -121,7 +121,7 @@
                     <tr>
                       <td>
                         <a href="<?=base_url('sys/candidates/update/' . $row['id'])?>">
-                        <?php if($row['img']): ?>
+                        <?php if(filexist($row['img']) && $row['img']): ?>
                           <img src="<?=base_url('uploads/'.$row['img'])?>" alt="" class="circle responsive-img valign candidate-img">
                         <?php else: ?>
                           <img src="<?=base_url('assets/images/no_image.gif')?>" alt="" class="circle responsive-img valign candidate-img">

@@ -106,7 +106,7 @@
             <div class="row card">
               <div class="col s12 l3">                
                   <div class="card-content">
-                    <?php if($info['img']): ?>
+                    <?php if(filexist($info['img']) && $info['img']): ?>
                       <img src="<?=base_url('uploads/'.$info['img'])?>" alt="" class="responsive-img">
                     <?php else: ?>
                       <img src="<?=base_url('assets/images/no_image.gif')?>" alt="" class="responsive-img valign">

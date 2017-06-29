@@ -49,7 +49,7 @@
 </head>
 
 <body class="indigo darken-2">
-  <!-- Start Page Loading -->
+  <!-- Start Page Loading  -->
   <div id="loader-wrapper">
       <div id="loader"></div>        
       <div class="loader-section section-left"></div>
@@ -97,7 +97,7 @@
                 foreach($pos['candidates'] as $can): ?>
                 <div class="row">
                   <div class="col s3 m6 l2">
-                    <?php if($can['img']): ?>
+                    <?php if(filexist($can['img']) && $can['img']): ?>
                           <img src="<?=base_url('uploads/'.$can['img'])?>" alt="" class="circle responsive-img valign materialboxed" data-caption="<?=$can['name']?>">
                         <?php else: ?>
                           <img src="<?=base_url('assets/images/no_image.gif')?>" alt="" class="circle responsive-img valign ">
