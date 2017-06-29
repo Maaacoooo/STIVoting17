@@ -90,14 +90,14 @@
                     </ul>
               </li>        
               <li class="bold"><a href="<?=base_url('sys/voting/voting_passes/')?>" class="waves-effect waves-cyan"><i class="mdi-communication-vpn-key"></i> Voting Passes</a></li> 
-              <li class="bold"><a href="<?=base_url('dashboard')?>" class="waves-effect waves-cyan"><i class="mdi-editor-insert-chart"></i> Voting Results</a></li> 
+              <li class="bold"><a href="<?=base_url('sys/voting/results/')?>" class="waves-effect waves-cyan"><i class="mdi-editor-insert-chart"></i> Voting Results</a></li> 
               <li class="no-padding">
                   <ul class="collapsible collapsible-accordion">
                       <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-settings"></i> Voting Settings</a>
                           <div class="collapsible-body">
                               <ul>
-                                  <li><a href="<?=base_url('sys/voting/create')?>">Pages</a></li>                                       
-                                  <li><a href="<?=base_url('sys/voting')?>">System Settings</a></li>                  
+                                  <li><a href="<?=base_url('sys/voting/pages')?>">Pages</a></li>                                       
+                                  <li><a href="<?=base_url('sys/voting/settings')?>">System Settings</a></li>                  
                               </ul>
                           </div>
                       </li>
