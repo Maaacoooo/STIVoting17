@@ -87,41 +87,37 @@
 
         
        <?=form_open('vote')?> 
+
           <?php if($positions):
               foreach($positions as $pos): ?>
             <div class="section card-panel">
-              <h4 class="header"><?=$pos['title']?></h4>
-              <div class="row">
-                <div class="col s12 l12">                 
-                  <ul class="collection">
-                  <?php 
-                    if($pos['candidates']):
-                    foreach($pos['candidates'] as $can): ?>
-                    <li class="collection-item avatar">
-                      <?php if($can['img']): ?>
-                          <img src="<?=base_url('uploads/'.$can['img'])?>" alt="" class="circle valign candidate-img">
+              <h4 class="header"><?=$pos['title']?></h4><!-- /.header -->
+              <?php 
+                if($pos['candidates']):
+                foreach($pos['candidates'] as $can): ?>
+                <div class="row">
+                  <div class="col s4 m6 l2">
+                    <?php if($can['img']): ?>
+                          <img src="<?=base_url('uploads/'.$can['img'])?>" alt="" class="circle responsive-img valign materialboxed" data-caption="<?=$can['name']?>">
                         <?php else: ?>
-                          <img src="<?=base_url('assets/images/no_image.gif')?>" alt="" class="circle valign candidate-img">
-                        <?php endif; ?>
-                      <span class="title"><?=$can['name']?></span>
-                      <p> <span class="badge-label <?=$can['color']?>"><?=$can['party']?></span>
-                        <br> <?=$can['course'] . ' ' . $can['year']?>
-                      </p>
-                      <div class="secondary-content">
-                        <input class="with-gap" name="vote[<?=cleancrypt($pos['title'])?>]" type="radio" id="<?=$can['id']?>" value="<?=cleancrypt($can['id'])?>" required>
-                        <label for="<?=$can['id']?>">Vote Me!</label>
-                      </div>
-                    </li>                  
-                  <?php 
-                    endforeach; 
-                    endif;  ?>
-                  </ul>
-                </div>         
-              </div>
-            </div>
-          <?php endforeach;
+                          <img src="<?=base_url('assets/images/no_image.gif')?>" alt="" class="circle responsive-img valign ">
+                    <?php endif; ?>
+                  </div><!-- /.col s4 m6 l2 -->
+                  <div class="col l8 s6">
+                    <h6 class="strong"><?=$can['name']?> </h6>
+                    <span><?=$can['course'] . ' ' . $can['year']?></span>
+                    <span class="badge-label <?=$can['color']?>"><?=$can['party']?></span>                               
+                  </div><!-- /.col l8 s6 -->
+                  <div class="col l2 s2">
+                    <input class="with-gap" name="vote[<?=cleancrypt($pos['title'])?>]" type="radio" id="<?=$can['id']?>" value="<?=cleancrypt($can['id'])?>" required>
+                    <label for="<?=$can['id']?>">Vote Me!</label>
+                  </div><!-- /.col l1 s2 -->
+                </div><!-- /.row -->
+              <?php endforeach;
               endif; ?>
-
+            </div><!-- /.section -->
+          <?php endforeach;
+          endif; ?>
 
         <div class="row valign-wrapper">     
             <button type="submit" class="btn waves-effect green darken-1 col s5 offset-s3">Submit Vote</button>    
