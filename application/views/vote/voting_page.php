@@ -96,22 +96,22 @@
                 if($pos['candidates']):
                 foreach($pos['candidates'] as $can): ?>
                 <div class="row">
-                  <div class="col s4 m6 l2">
+                  <div class="col s3 m6 l2">
                     <?php if($can['img']): ?>
                           <img src="<?=base_url('uploads/'.$can['img'])?>" alt="" class="circle responsive-img valign materialboxed" data-caption="<?=$can['name']?>">
                         <?php else: ?>
                           <img src="<?=base_url('assets/images/no_image.gif')?>" alt="" class="circle responsive-img valign ">
                     <?php endif; ?>
-                  </div><!-- /.col s4 m6 l2 -->
+                  </div><!-- /.col s3 m6 l2 -->
                   <div class="col l8 s6">
                     <h6 class="strong"><?=$can['name']?> </h6>
-                    <span><?=$can['course'] . ' ' . $can['year']?></span>
+                    <span><?=$can['course'] . ' ' . $can['year']?></span> <br/>
                     <span class="badge-label <?=$can['color']?>"><?=$can['party']?></span>                               
                   </div><!-- /.col l8 s6 -->
-                  <div class="col l2 s2">
+                  <div class="col l2 s3">
                     <input class="with-gap" name="vote[<?=cleancrypt($pos['title'])?>]" type="radio" id="<?=$can['id']?>" value="<?=cleancrypt($can['id'])?>" required>
                     <label for="<?=$can['id']?>">Vote Me!</label>
-                  </div><!-- /.col l1 s2 -->
+                  </div><!-- /.col l1 s3 -->
                 </div><!-- /.row -->
               <?php endforeach;
               endif; ?>
