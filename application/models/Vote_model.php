@@ -187,7 +187,7 @@ Class Vote_model extends CI_Model
        
        foreach ($vote as $key => $value) {
             $data = array(              
-                'candidate_id' => $value,
+                'candidate_id' => cleancrypt($this->encryption->decrypt($value)),
                 'vote_pass'    => $user 
              );
 

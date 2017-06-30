@@ -109,7 +109,7 @@
                     <span class="badge-label <?=$can['color']?>"><?=$can['party']?></span>                               
                   </div><!-- /.col l8 s6 -->
                   <div class="col l2 s3">
-                    <input class="with-gap" name="vote[<?=cleancrypt($pos['title'])?>]" type="radio" id="<?=$can['id']?>" value="<?=cleancrypt($can['id'])?>" required>
+                    <input class="with-gap" name="vote[<?=cleancrypt($pos['title'])?>]" type="radio" id="<?=$can['id']?>" value="<?=$this->encryption->encrypt($can['id'])?>" required>
                     <label for="<?=$can['id']?>">Vote Me!</label>
                   </div><!-- /.col l1 s3 -->
                 </div><!-- /.row -->
