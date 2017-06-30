@@ -158,6 +158,31 @@ class Voting extends CI_Controller {
 	}
 
 
+	public function pages() {
+
+		$userdata = $this->session->userdata('admin_logged_in'); //it's pretty clear it's a userdata
+
+		if($userdata)	{
+
+			$data['title'] = 'Voting Results';
+			$data['site_title'] = APP_NAME;
+			$data['user'] = $this->user_model->userdetails($userdata['username']); //fetches users record
+
+			$data['positions'] = $this->candidates_model->fetch_votable();			
+			$data['total_passUsed'] = $this->vote_model->count_votepass(1);
+			//var_dump($data['positions']);
+
+			$this->load->view('admin/voting/voting_results', $data);
+
+		} else {
+
+			$this->session->set_flashdata('error', 'You need to login!');
+			redirect('sys/dashboard/login', 'refresh');
+		}
+		
+	}
+
+
 
 
 }
