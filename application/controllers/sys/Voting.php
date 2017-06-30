@@ -164,35 +164,51 @@ class Voting extends CI_Controller {
 
 		if($userdata)	{
 
-			$data['title'] = 'Pages';
+			
 			$data['site_title'] = APP_NAME;
 			$data['user'] = $this->user_model->userdetails($userdata['username']); //fetches users record
 
-			$data['results'] = $this->settings_model->fetch_settings('vote_page');			
+			$page_id = $this->uri->segment(4); // the page ID
+
+			//If Page ID exist, show update form
+			if($page_id) {
+
+				$data['res'] = $this->settings_model->setting($page_id);		
+				$data['title'] = $data['res']['title'];	
 			
-			$this->form_validation->set_rules('value', 'Content', 'trim'); 
-			$this->form_validation->set_rules('title', 'Title', 'trim'); 
-			$this->form_validation->set_rules('key', 'Key', 'trim|required'); 
+				$this->form_validation->set_rules('value', 'Content', 'trim'); 
+				$this->form_validation->set_rules('title', 'Title', 'trim|required'); 
+				$this->form_validation->set_rules('key', 'Key', 'trim|required'); 
 
 
-			if($this->form_validation->run() == FALSE)	{
-				$this->load->view('admin/voting/pages', $data);
-			} else {			
+				if($this->form_validation->run() == FALSE)	{
+					$this->load->view('admin/voting/pages/update', $data);
+				} else {			
 
-				//Proceed saving 				
-				$key = $this->encryption->decrypt($this->input->post('key')); //ID of the row
+					//Proceed saving 				
+					$key = $this->encryption->decrypt($this->input->post('key')); //ID of the row
 
-				if($this->settings_model->update_setting($key)) {			
-			
-					$this->session->set_flashdata('success', 'Succes! Page Updated!');
-					redirect($_SERVER['HTTP_REFERER'], 'refresh');
-				} else {
-					//failure
-					$this->session->set_flashdata('error', 'Oops! Error occured!');
-					redirect($_SERVER['HTTP_REFERER'], 'refresh');
-				}
+					if($this->settings_model->update_setting($key)) {			
 				
+						$this->session->set_flashdata('success', 'Succes! Page Updated!');
+						redirect($_SERVER['HTTP_REFERER'], 'refresh');
+					} else {
+						//failure
+						$this->session->set_flashdata('error', 'Oops! Error occured!');
+						redirect($_SERVER['HTTP_REFERER'], 'refresh');
+					}
+					
+				}
+
+			} else {
+				//show list
+				$data['title'] = 'Pages';
+				$data['results'] = $this->settings_model->fetch_settings('vote_page');	
+				$this->load->view('admin/voting/pages/list', $data);
+
 			}
+
+			
 
 		} else {
 

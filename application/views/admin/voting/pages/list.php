@@ -100,39 +100,19 @@
                     </div>
               <?php } ?> 
               </div>
-            </div>   
+            </div>
+            
+            <table class="bordered highlight">
+              <?php if($results):
+              foreach($results as $res): ?>
+                <tr>
+                  <td><a href="<?=base_url('sys/voting/pages/'.$res['key'])?>"><?=$res['title']?></a></td>
+                </tr>
+              <?php endforeach; 
+              endif; ?>
+            </table><!-- /.table --> 
+         
           </div>
-
-
-          <?php if($results):
-          foreach($results as $res): ?>
-          <?=form_open('sys/voting/pages')?>
-          <div class="section card-panel">
-            <div class="row">
-              <div class="input-field col s12">
-                <i class="mdi-editor-mode-edit prefix"></i>              
-                <input type="text" name="title" id="title" class="validate strong" value="<?=$res['title']?>" />
-                <label for="title">Title</label>
-              </div><!-- /.col s12 -->
-            </div><!-- /.row -->
-            <div class="row">              
-              <div class="col s12 l8">
-                <textarea name="value" id="" class="ckeditor"><?=$res['value']?></textarea>
-              </div><!-- /.col s12 l8 -->     
-              <div class="col s12 l4">
-                <div class="card-panel light-blue lighten-2">
-                  <div class="card-content white-text">
-                    <?=$res['hint']?>
-                  </div><!-- /.card-content -->
-                </div><!-- /.card-panel light-blue -->
-                <input type="hidden" name="key" value="<?=$this->encryption->encrypt($res['key'])?>" />
-                <button type="submit" class="btn amber col s12">Update</button>
-              </div><!-- /.col s12 l4 -->         
-            </div><!-- /.row -->            
-          </div><!-- /.section -->
-          <?=form_close()?>
-          <?php endforeach;
-          endif; ?>
         </div>
         <!--end container-->
       </section>
@@ -147,9 +127,6 @@
 
 
      <!-- //////////////////////////////////////////////////////////////////////////// -->
-
-    <script type="text/javascript" src="<?=base_url('')?>assets/ckeditor/ckeditor.js"></script>   
-
 
     <?php $this->load->view('inc/footer'); ?>
 
