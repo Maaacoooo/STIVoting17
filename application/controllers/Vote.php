@@ -84,7 +84,7 @@ class Vote extends CI_Controller {
 		$data['title'] = 'Vote Success!';
 		$data['site_title'] = APP_NAME;
 
-		$data['page_data'] = $this->settings_model->page('vote_success');		
+		$data['page_data'] = $this->settings_model->setting('vote_success');		
 
 		$this->load->view('vote/vote_success', $data);
 
@@ -95,7 +95,7 @@ class Vote extends CI_Controller {
 		$data['title'] = 'Error Occured!';
 		$data['site_title'] = APP_NAME;
 
-		$data['page_data'] = $this->settings_model->page('vote_error');
+		$data['page_data'] = $this->settings_model->setting('vote_error');
 
 		$this->load->view('vote/vote_error', $data);
 
@@ -108,7 +108,7 @@ class Vote extends CI_Controller {
 			$data['title'] = 'General Instructions';
 			$data['site_title'] = APP_NAME;
 
-			$data['page_data'] = $this->settings_model->page('vote_instruc');
+			$data['page_data'] = $this->settings_model->setting('vote_instruc');
 
 			$this->load->view('vote/vote_instructions', $data);			
 

@@ -30,7 +30,7 @@ Class Settings_model extends CI_Model
      * @param  String        $id     The Unique Key or ID
      * @return String Array          The array of row
      */
-    function page($id) {
+    function setting($id) {
 
              $this->db->select('*');        
              $this->db->where('key', $id);          
@@ -46,7 +46,7 @@ Class Settings_model extends CI_Model
      * @param  String        $grp    The settings_grp 
      * @return String Array          The array of results
      */
-    function fetch_pages($grp) {
+    function fetch_settings($grp) {
 
              $this->db->select('*');        
              $this->db->where('setting_grp', $grp);          
@@ -57,7 +57,7 @@ Class Settings_model extends CI_Model
     }
 
 
-    function update_page($key) {
+    function update_setting($key) {
 
             $data = array(             
                 'title'     => $this->input->post('title'),  

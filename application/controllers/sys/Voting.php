@@ -168,7 +168,7 @@ class Voting extends CI_Controller {
 			$data['site_title'] = APP_NAME;
 			$data['user'] = $this->user_model->userdetails($userdata['username']); //fetches users record
 
-			$data['results'] = $this->settings_model->fetch_pages('vote_page');			
+			$data['results'] = $this->settings_model->fetch_settings('vote_page');			
 			
 			$this->form_validation->set_rules('value', 'Content', 'trim'); 
 			$this->form_validation->set_rules('title', 'Title', 'trim'); 
@@ -182,7 +182,52 @@ class Voting extends CI_Controller {
 				//Proceed saving 				
 				$key = $this->encryption->decrypt($this->input->post('key')); //ID of the row
 
-				if($this->settings_model->update_page($key)) {			
+				if($this->settings_model->update_setting($key)) {			
+			
+					$this->session->set_flashdata('success', 'Succes! Page Updated!');
+					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+				} else {
+					//failure
+					$this->session->set_flashdata('error', 'Oops! Error occured!');
+					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+				}
+				
+			}
+
+		} else {
+
+			$this->session->set_flashdata('error', 'You need to login!');
+			redirect('sys/dashboard/login', 'refresh');
+		}
+		
+	}
+
+
+	public function settings() {
+
+		$userdata = $this->session->userdata('admin_logged_in'); //it's pretty clear it's a userdata
+
+		if($userdata)	{
+
+			$data['title'] = 'Settings';
+			$data['site_title'] = APP_NAME;
+			$data['user'] = $this->user_model->userdetails($userdata['username']); //fetches users record
+
+			$data['results'] = $this->settings_model->fetch_settings('vote_page');			
+			
+			$this->form_validation->set_rules('value', 'Content', 'trim'); 
+			$this->form_validation->set_rules('title', 'Title', 'trim'); 
+			$this->form_validation->set_rules('key', 'Key', 'trim|required'); 
+
+
+			if($this->form_validation->run() == FALSE)	{
+				$this->load->view('admin/voting/settings', $data);
+			} else {			
+
+				//Proceed saving 				
+				$key = $this->encryption->decrypt($this->input->post('key')); //ID of the row
+
+				if($this->settings_model->update_setting($key)) {			
 			
 					$this->session->set_flashdata('success', 'Succes! Page Updated!');
 					redirect($_SERVER['HTTP_REFERER'], 'refresh');
