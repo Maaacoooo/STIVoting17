@@ -33,6 +33,7 @@ class Voting extends CI_Controller {
        $this->load->model('user_model');
        $this->load->model('candidates_model');
        $this->load->model('vote_model');
+       $this->load->model('settings_model');
 	}	
 
 
@@ -145,7 +146,6 @@ class Voting extends CI_Controller {
 
 			$data['positions'] = $this->candidates_model->fetch_votable();			
 			$data['total_passUsed'] = $this->vote_model->count_votepass(1);
-			//var_dump($data['positions']);
 
 			$this->load->view('admin/voting/voting_results', $data);
 
@@ -164,15 +164,35 @@ class Voting extends CI_Controller {
 
 		if($userdata)	{
 
-			$data['title'] = 'Voting Results';
+			$data['title'] = 'Pages';
 			$data['site_title'] = APP_NAME;
 			$data['user'] = $this->user_model->userdetails($userdata['username']); //fetches users record
 
-			$data['positions'] = $this->candidates_model->fetch_votable();			
-			$data['total_passUsed'] = $this->vote_model->count_votepass(1);
-			//var_dump($data['positions']);
+			$data['results'] = $this->settings_model->fetch_pages('vote_page');			
+			
+			$this->form_validation->set_rules('value', 'Content', 'trim'); 
+			$this->form_validation->set_rules('title', 'Title', 'trim'); 
+			$this->form_validation->set_rules('key', 'Key', 'trim|required'); 
 
-			$this->load->view('admin/voting/voting_results', $data);
+
+			if($this->form_validation->run() == FALSE)	{
+				$this->load->view('admin/voting/pages', $data);
+			} else {			
+
+				//Proceed saving 				
+				$key = $this->encryption->decrypt($this->input->post('key')); //ID of the row
+
+				if($this->settings_model->update_page($key)) {			
+			
+					$this->session->set_flashdata('success', 'Succes! Page Updated!');
+					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+				} else {
+					//failure
+					$this->session->set_flashdata('error', 'Oops! Error occured!');
+					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+				}
+				
+			}
 
 		} else {
 

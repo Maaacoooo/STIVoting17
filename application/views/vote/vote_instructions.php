@@ -65,10 +65,10 @@
           </div>
         </div>
 
-        <h4 class="header">General Instructions</h4><!-- /.header -->
+        <h4 class="header"><?=$page_data['title']?></h4><!-- /.header -->
         <div class="row">
           <div class="col s12">
-            <p>Since you are</p>
+            <?=$page_data['value']?>
           </div><!-- /.col s12 -->
         </div><!-- /.row -->
 

@@ -66,9 +66,10 @@
           </div>
         </div>
 
-        <h1 class="center col s12">Your vote is Submitted!</h1>
-        <p class="center">Thank you for voting! To check the results, please visit the <a href="<?=base_url('vote/results')?>">Result Page</a>.</p><!-- /.center -->
-        <p class="center">Are you happy with the new Voting System? Rate us a Five Star!</p><!-- /.center -->
+        <h1 class="center col s12"><?=$page_data['title']?></h1>
+        <div class="center">
+          <?=$page_data['value']?>
+        </div><!-- /.text-center -->
  
       <?php $this->load->view('inc/copy_footer');?>
     </div>

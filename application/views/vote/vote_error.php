@@ -66,9 +66,10 @@
           </div>
         </div>
 
-        <h1 class="center col s12">Oops! An Error has Occured!</h1>
-        <p class="center">We are very sorry for this inconvenience! :(</p><!-- /.center -->
-        <p class="center">Please contact the Election Supervisor and/or the Developer, and submit your Voting Pass.</p><!-- /.center -->
+        <h1 class="center col s12"><?=$page_data['title']?></h1>
+        <div class="center">
+          <?=$page_data['value']?>
+        </div><!-- /.text-center -->
  
       <?php $this->load->view('inc/copy_footer');?>
     </div>

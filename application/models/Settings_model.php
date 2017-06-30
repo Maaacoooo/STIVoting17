@@ -55,6 +55,18 @@ Class Settings_model extends CI_Model
 
              return $query->result_array();
     }
+
+
+    function update_page($key) {
+
+            $data = array(             
+                'title'     => $this->input->post('title'),  
+                'value'     => $this->input->post('value')        
+             );
+            
+            $this->db->where('key', $key);
+            return $this->db->update('settings', $data);     
+    }
      
 
 }

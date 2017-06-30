@@ -30,6 +30,7 @@ class Vote extends CI_Controller {
 		parent::__construct();		
        $this->load->model('vote_model');
        $this->load->model('candidates_model');
+       $this->load->model('settings_model');
 	}	
 
 
@@ -82,6 +83,9 @@ class Vote extends CI_Controller {
 
 		$data['title'] = 'Vote Success!';
 		$data['site_title'] = APP_NAME;
+
+		$data['page_data'] = $this->settings_model->page('vote_success');		
+
 		$this->load->view('vote/vote_success', $data);
 
 	}
@@ -90,6 +94,9 @@ class Vote extends CI_Controller {
 
 		$data['title'] = 'Error Occured!';
 		$data['site_title'] = APP_NAME;
+
+		$data['page_data'] = $this->settings_model->page('vote_error');
+
 		$this->load->view('vote/vote_error', $data);
 
 	}
@@ -100,7 +107,11 @@ class Vote extends CI_Controller {
 
 			$data['title'] = 'General Instructions';
 			$data['site_title'] = APP_NAME;
-			$this->load->view('vote/vote_instructions', $data);
+
+			$data['page_data'] = $this->settings_model->page('vote_instruc');
+
+			$this->load->view('vote/vote_instructions', $data);			
+
 		} else {
 
 			$this->session->set_flashdata('error', 'You need a Vote Pass!');
