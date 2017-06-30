@@ -224,7 +224,7 @@
                          </div><!-- /.input-field col s12 -->
                        </div><!-- /.row -->
                       
-                      <input type="hidden" name="id" value="<?=$info['id']?>" />
+                      <input type="hidden" name="id" value="<?=$this->encryption->encrypt($info['id'])?>" />
                                   
               </div><!-- /.col s12 l8 -->
             </div><!-- /.row -->
@@ -237,7 +237,7 @@
                 <div class="modal-content red darken-4 white-text">
                     <p>Are you sure to delete the record of <span class="strong"><?=$info['name']?></span>?</p>
                     <p>You <span class="strong">CANNOT UNDO</span> this action.</p>
-                    <input type="hidden" name="id" value="<?=$info['id']?>" />
+                    <input type="hidden" name="id" value="<?=$this->encryption->encrypt($info['id'])?>" />
                   </div>
                   <div class="modal-footer grey darken-4">
                     <a href="#" class="waves-effect waves-red btn-flat amber-text strong modal-action modal-close">Cancel</a>

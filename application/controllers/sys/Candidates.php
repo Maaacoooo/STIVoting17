@@ -147,7 +147,7 @@ class Candidates extends CI_Controller {
 			} else {			
 
 				//Proceed saving 				
-				$key_id = $this->input->post('id'); //ID of the row
+				$key_id = $this->encryption->decrypt($this->input->post('id')); //ID of the row
 				if($this->candidates_model->update_candidate($key_id)) {			
 			
 					$this->session->set_flashdata('success', 'Succes! Candidate Updated!');
@@ -188,7 +188,7 @@ class Candidates extends CI_Controller {
 
 			} else {
 
-				$key_id = $this->input->post('id'); //the ID of the row
+				$key_id = $this->encryption->decrypt($this->input->post('id')); //ID of the row				
 
 				if($this->candidates_model->delete_candidate($key_id)) {
 					$this->session->set_flashdata('success', 'Deleted!');
