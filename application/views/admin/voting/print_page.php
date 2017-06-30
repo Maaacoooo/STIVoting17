@@ -34,7 +34,7 @@
 		font-family: "Calibri";
 	}
 </style>
-<body onload="#javascript:print()">
+<body onload="javascript:print()">
 	<div class="container">
 	<?php foreach($passes as $pass): ?>
 		<div class="passes">
