@@ -330,7 +330,8 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = 'sadlkasdmassd';
+$config['encryption_key'] = hex2bin('53dee05b8a8ff935bb11050329d1369b');
+
 
 /*
 |--------------------------------------------------------------------------
