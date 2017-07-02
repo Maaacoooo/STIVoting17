@@ -187,8 +187,10 @@ class Voting extends CI_Controller {
 
 					//Proceed saving 				
 					$key = $this->encryption->decrypt($this->input->post('key')); //ID of the row
+					$title = $this->input->post('title');
+					$value = $this->input->post('value');
 
-					if($this->settings_model->update_setting($key)) {			
+					if($this->settings_model->update_setting($key, $title, $value)) {			
 				
 						$this->session->set_flashdata('success', 'Succes! Page Updated!');
 						redirect($_SERVER['HTTP_REFERER'], 'refresh');
@@ -229,29 +231,47 @@ class Voting extends CI_Controller {
 			$data['site_title'] = APP_NAME;
 			$data['user'] = $this->user_model->userdetails($userdata['username']); //fetches users record
 
-			$data['results'] = $this->settings_model->fetch_settings('vote_page');			
+			$data['vote_results'] 	= $this->settings_model->setting('publish_vote_result');			
+			$data['vote_status'] 	= $this->settings_model->setting('voting_status');			
 			
-			$this->form_validation->set_rules('value', 'Content', 'trim'); 
-			$this->form_validation->set_rules('title', 'Title', 'trim'); 
-			$this->form_validation->set_rules('key', 'Key', 'trim|required'); 
+			if($this->input->post('master')) {
+				$this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_user'); 
+			}
+			
 
 
 			if($this->form_validation->run() == FALSE)	{
 				$this->load->view('admin/voting/settings', $data);
-			} else {			
+			} else {	
+				
+				//For modals submission	
+				$master = $this->encryption->decrypt($this->input->post('master'));
 
-				//Proceed saving 				
-				$key = $this->encryption->decrypt($this->input->post('key')); //ID of the row
+				if($master == 'clearvote') {
 
-				if($this->settings_model->update_setting($key)) {			
-			
-					$this->session->set_flashdata('success', 'Succes! Page Updated!');
-					redirect($_SERVER['HTTP_REFERER'], 'refresh');
-				} else {
-					//failure
-					$this->session->set_flashdata('error', 'Oops! Error occured!');
-					redirect($_SERVER['HTTP_REFERER'], 'refresh');
-				}
+					$methods[] = $this->vote_model->clear_votekeys();
+					$methods[] = $this->vote_model->clear_votes();	
+
+					if($methods) {
+						$this->session->set_flashdata('success', 'Success! Cleared all Votes and Passes!');
+						redirect($_SERVER['HTTP_REFERER'], 'refresh');
+					} else {
+						$this->session->set_flashdata('error', 'Oops! Error occured!');
+						redirect($_SERVER['HTTP_REFERER'], 'refresh');
+					}
+
+				} elseif($master == 'reset') {
+
+					if($this->settings_model->reset_setting()) {
+						$this->session->set_flashdata('success', 'Success! You have Resetted the Voting System!');
+						redirect($_SERVER['HTTP_REFERER'], 'refresh');
+					} else {
+						$this->session->set_flashdata('error', 'Oops! Error occured!');
+						redirect($_SERVER['HTTP_REFERER'], 'refresh');
+					}
+
+				} 
+
 				
 			}
 
@@ -261,6 +281,35 @@ class Voting extends CI_Controller {
 			redirect('sys/dashboard/login', 'refresh');
 		}
 		
+	}
+
+	function update_basic_setting() {
+
+		//Switches Submission
+		$method[] = $this->settings_model->update_setting('publish_vote_result', 'Publish Vote Results', $this->input->post('vote_results'));
+		$method[] = $this->settings_model->update_setting('voting_status', 'Publish Vote Results', $this->input->post('vote_status'));
+		
+				if($method) {
+					$this->session->set_flashdata('success', 'Success! Updated Setting');
+					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+				} elseif($this->input->post('vote_status')) {
+
+		}
+				
+
+	}
+
+
+	public function check_user($password) {
+		$username = $this->session->userdata('admin_logged_in')['username'];
+		$result = $this->user_model->check_user($username, $password);
+
+		if($result) {			
+			return TRUE;
+		} else {
+			$this->form_validation->set_message('check_user', 'Incorrect Password!');
+			return FALSE;
+		}
 	}
 
 
