@@ -56,6 +56,11 @@ Class User_model extends CI_Model
 
     }
 
+    /**
+     * Fetches the User Records
+     * @param  String       $user     the username
+     * @return String Array           the array of row 
+     */
     function userdetails($user) {
 
              $this->db->select('*');        
@@ -65,6 +70,42 @@ Class User_model extends CI_Model
              $query = $this->db->get('users');
 
              return $query->row_array();
+    }
+
+
+    function create_user() {
+
+            $filename = ''; //img filename empty if not present
+
+            //Process Image Upload
+              if($_FILES['img']['name'] != NULL)  {        
+
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'gif|jpg|png'; 
+                $config['encrypt_name'] = TRUE;                        
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);         
+                
+                $field_name = "img";
+                $this->upload->do_upload($field_name);
+                $data2 = array('upload_data' => $this->upload->data());
+                foreach ($data2 as $key => $value) {     
+                  $filename = $value['file_name'];
+                }
+                
+            }
+      
+            $data = array(              
+                'username'  => $this->input->post('username'),  
+                'password'  => password_hash('STIDipolog', PASSWORD_DEFAULT),  //Default Password
+                'name'      => $this->input->post('name'),  
+                'usertype'  => $this->input->post('usertype'),                 
+                'img'       => $filename  
+             );
+       
+            return $this->db->insert('users', $data);      
+
     }
 
 
