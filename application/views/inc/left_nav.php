@@ -64,7 +64,7 @@
                               <ul>
                                   <li><a href="<?=base_url('users/create')?>">Register Users</a>
                                   </li>                                       
-                                  <li><a href="<?=base_url('users')?>">Users</a>
+                                  <li><a href="<?=base_url('users')?>">User List</a>
                                   </li>                                
                               </ul>
                           </div>
@@ -80,9 +80,7 @@
                       <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-social-school"></i> Candidates</a>
                           <div class="collapsible-body">
                               <ul>
-                                  <li><a href="<?=base_url('sys/candidates/')?>">Candidate List</a></li>                       
-                                  <li><a href="<?=base_url('sys/candidates/years')?>">Year Level</a></li>  
-                                  <li><a href="<?=base_url('sys/candidates/courses')?>">Course</a></li>  
+                                  <li><a href="<?=base_url('sys/candidates/')?>">Candidate List</a></li>                      
                                   <li><a href="<?=base_url('sys/candidates/partylists')?>">Party List</a></li>                  
                               </ul>
                           </div>
