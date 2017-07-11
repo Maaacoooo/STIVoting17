@@ -108,6 +108,102 @@ Class User_model extends CI_Model
 
     }
 
+    function reset_password($user) {
+
+        $data = array(            
+                'password'  => password_hash('STIDipolog', PASSWORD_DEFAULT)  //Default Password
+             );
+            $this->db->where('username', $user);            
+            
+            return $this->db->update('users', $data);   
+    }
+
+    /**
+     * Updates a user record
+     * @param  int      $id    the DECODED id of the item. 
+     * @return void            returns TRUE if success
+     */
+    function update_user($user) { 
+
+            $filename = $this->userdetails($user)['img']; //gets the old data 
+
+            //Process Image Upload
+              if($_FILES['img']['name'] != NULL)  { 
+
+
+                //Deletes the old photo
+                if(!filexist($filename)) {
+                  unlink('./uploads/'.$filename); 
+                }
+
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'gif|jpg|png'; 
+                $config['encrypt_name'] = TRUE;                        
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);         
+                
+                $field_name = "img";
+                $this->upload->do_upload($field_name);
+                $data2 = array('upload_data' => $this->upload->data());
+                foreach ($data2 as $key => $value) {     
+                  $filename = $value['file_name'];
+                }
+                
+            }
+      
+            $data = array(           
+                'name'      => $this->input->post('name'),  
+                'usertype'  => $this->input->post('usertype'),                 
+                'img'       => $filename  
+             );
+            
+            $this->db->where('username', $user);
+            return $this->db->update('users', $data);          
+        
+    }
+
+    /**
+     * Returns the paginated array of rows 
+     * @param  int      $limit      The limit of the results; defined at the controller
+     * @param  int      $id         the Page ID of the request. 
+     * @return Array        The array of returned rows 
+     */
+    function fetch_users($limit, $id) {
+
+            $this->db->limit($limit, (($id-1)*$limit));
+
+            $query = $this->db->get("users");
+
+            if ($query->num_rows() > 0) {
+                return $query->result_array();
+            }
+            return false;
+
+    }
+
+    /**
+     * Returns the total number of rows of users
+     * @return int       the total rows
+     */
+    function count_users() {
+        return $this->db->count_all("users");
+    }
+
+    ////////////////////////////////
+    /// HELPER                    //
+    ////////////////////////////////
+   
+
+    function usertypes() {
+
+            $this->db->select('*');
+            $query = $this->db->get('usertypes');
+
+            return $query->result_array();
+
+    }
+
 
 
 }
