@@ -163,6 +163,26 @@ Class User_model extends CI_Model
         
     }
 
+
+        /**
+     * Deletes a user record
+     * @param  int    $id    the DECODED id of the item.   
+     * @return boolean    returns TRUE if success
+     */
+    function delete_user($user) {
+
+        $filename = $this->userdetails($user)['img'];
+
+        //Deletes the old photo
+        if(!filexist($filename)) {
+          unlink('./uploads/'.$filename); 
+        }
+
+        return $this->db->delete('users', array('username' => $user)); 
+
+    }
+
+
     /**
      * Returns the paginated array of rows 
      * @param  int      $limit      The limit of the results; defined at the controller

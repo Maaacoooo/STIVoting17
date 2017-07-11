@@ -76,7 +76,7 @@ class Users extends CI_Controller {
 		    $data['total_result'] = $config["total_rows"];
 		    //END PAGINATION		
 		
-			//Form Validation for candidate
+			//Form Validation for user
 			$this->form_validation->set_rules('name', 'Name', 'trim|required'); 
 			$this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[users.username]|alpha_dash'); 
 			$this->form_validation->set_rules('usertype', 'Usertype', 'trim|required'); 
@@ -87,7 +87,7 @@ class Users extends CI_Controller {
 				$this->load->view('admin/voting/user/list', $data);
 			} else {	
 		
-				//Proceed saving candidate				
+				//Proceed saving user				
 				if($this->user_model->create_user()) {			
 				
 					$this->session->set_flashdata('success', 'Succes! User registered!');
@@ -114,41 +114,35 @@ class Users extends CI_Controller {
 
 		if($userdata)	{
 
-			$data['title'] = 'Update Candidate';
+			$data['title'] = 'Update User';
 			$data['site_title'] = APP_NAME;
 			$data['user'] = $this->user_model->userdetails($userdata['username']); //fetches users record
 
 			//Page Data 
-			$data['years']		= $this->candidates_model->years();
-			$data['courses']	= $this->candidates_model->courses();
-			$data['party']		= $this->candidates_model->party();
-			$data['positions']	= $this->candidates_model->positions();
+			$data['usertypes']		= $this->user_model->usertypes();			
 
-			$data['info']		= $this->candidates_model->read_candidate($id);
+			$data['info']		= $this->user_model->userdetails($id);
 
 			//Validate if record exist
 			 //IF NO ID OR NO RESULT, REDIRECT
 				if(!$id OR !$data['info']) {
-					redirect('sys/candidates', 'refresh');
+					redirect('sys/users', 'refresh');
 			}	
 
-			//Form Validation for candidate
-			$this->form_validation->set_rules('name', 'Name', 'trim|required'); 
-			$this->form_validation->set_rules('party', 'Partylist', 'trim|required'); 
-			$this->form_validation->set_rules('course', 'Courses', 'trim|required'); 
-			$this->form_validation->set_rules('year', 'Year', 'trim|required'); 
-			$this->form_validation->set_rules('id', 'ID', 'trim|required'); 
+			//Form Validation for user
+			$this->form_validation->set_rules('name', 'Name', 'trim|required');  
+			$this->form_validation->set_rules('usertype', 'Usertype', 'trim|required'); 
 		
 
 			if($this->form_validation->run() == FALSE)	{
-				$this->load->view('admin/voting/candidate/update', $data);
+				$this->load->view('admin/voting/user/update', $data);
 			} else {			
 
 				//Proceed saving candidate				
 				$key_id = $this->encryption->decrypt($this->input->post('id')); //ID of the row
-				if($this->candidates_model->update_candidate($key_id)) {			
+				if($this->user_model->update_user($key_id)) {			
 				
-					$this->session->set_flashdata('success', 'Succes! Candidate Updated!');
+					$this->session->set_flashdata('success', 'Succes! User Updated!');
 					redirect($_SERVER['HTTP_REFERER'], 'refresh');
 				} else {
 					//failure
@@ -185,8 +179,8 @@ class Users extends CI_Controller {
 
 				$key_id = $this->encryption->decrypt($this->input->post('id')); //ID of the row				
 
-				if($this->candidates_model->delete_candidate($key_id)) {
-					$this->session->set_flashdata('success', 'Deleted!');
+				if($this->user_model->delete_user($key_id)) {
+					$this->session->set_flashdata('success', 'User Deleted!');
 					redirect($_SERVER['HTTP_REFERER'], 'refresh');
 				}
 			}
