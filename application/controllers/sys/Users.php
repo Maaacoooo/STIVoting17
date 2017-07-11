@@ -166,7 +166,7 @@ class Users extends CI_Controller {
 		$userdata = $this->session->userdata('admin_logged_in'); //it's pretty clear it's a userdata
 
 		if($userdata)	{
-
+			
 			//FORM VALIDATION
 			$this->form_validation->set_rules('id', 'ID', 'trim|required');   
 		 
@@ -181,6 +181,39 @@ class Users extends CI_Controller {
 
 				if($this->user_model->delete_user($key_id)) {
 					$this->session->set_flashdata('success', 'User Deleted!');
+					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+				}
+			}
+
+		} else {
+
+			$this->session->set_flashdata('error', 'You need to login!');
+			redirect('sys/dashboard/login', 'refresh');
+		}
+
+	}
+
+
+	public function resetpassword()		{
+
+		$userdata = $this->session->userdata('admin_logged_in'); //it's pretty clear it's a userdata
+
+		if($userdata)	{
+			
+			//FORM VALIDATION
+			$this->form_validation->set_rules('id', 'ID', 'trim|required');   
+		 
+		   if($this->form_validation->run() == FALSE)	{
+
+				$this->session->set_flashdata('error', 'An Error has Occured!');
+				redirect($_SERVER['HTTP_REFERER'], 'refresh');
+
+			} else {
+
+				$key_id = $this->encryption->decrypt($this->input->post('id')); //ID of the row				
+
+				if($this->user_model->reset_password($key_id)) {
+					$this->session->set_flashdata('success', 'Password Resetted to Default!');
 					redirect($_SERVER['HTTP_REFERER'], 'refresh');
 				}
 			}

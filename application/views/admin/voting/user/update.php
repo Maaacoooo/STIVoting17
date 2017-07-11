@@ -158,20 +158,26 @@
                        </div><!-- /.row -->
     
                        <div class="row">
-                          <div class="input-field col s12">
-                                  <button class="btn amber waves-effect waves-light right" type="submit" name="action">Update
-                                    <i class="mdi-editor-mode-edit left"></i>
-                                  </button>
+                          <div class="input-field col s2 <?php if(($user['username'] == $info['username'])){echo'offset-s8';}else{echo'offset-s6';}?>">
+                              <button class="btn amber waves-effect waves-light right" type="submit" name="action">Update
+                                <i class="mdi-editor-mode-edit left"></i>
+                              </button>                                  
                           </div>
+                          <div class="input-field col s2">
+                            <a href="#resetModal" class="modal-trigger btn waves-effect green right">Reset <i class="mdi-action-cached left"></i></a>
+                          </div><!-- /.input-field col s2 -->
+                          <?php if(!($user['username'] == $info['username'])): ?>
+                          <div class="input-field col s2">
+                           <a href="#deleteModal" class="modal-trigger btn waves-effect red right">Delete <i class="mdi-action-delete left"></i></a>                            
+                          </div><!-- /.input-field col s2 -->
+                          <?php endif; ?>
                        </div><!-- /.row -->
-                       <?php if(!$user['username'] == $info['username']): ?>
+                       
                        <div class="row">
                          <div class="input-field col s12">
-                           <a href="#deleteModal" class="modal-trigger btn waves-effect red right">Delete <i class="mdi-action-delete right"></i></a>
                          </div><!-- /.input-field col s12 -->
                        </div><!-- /.row -->
-                       <?php endif; ?>
-                      
+                   
                       <input type="hidden" name="id" value="<?=$this->encryption->encrypt($info['username'])?>" />
                                   
               </div><!-- /.col s12 l8 -->
@@ -179,7 +185,7 @@
             <?=form_close()?>
 
             <!-- Modals -->
-           <?php if(!$user['username'] == $info['username']): ?>
+           <?php if(!($user['username'] == $info['username'])): ?>
            <div id="deleteModal" class="modal">
               <?=form_open('sys/users/delete')?>
                 <div class="modal-content red darken-4 white-text">
@@ -194,6 +200,21 @@
               <?=form_close()?>
             </div>
             <?php endif; ?>
+
+            <div id="resetModal" class="modal">
+              <?=form_open('sys/users/resetpassword')?>
+                <div class="modal-content green darken-2 white-text">
+                    <p>Are you sure to reset to DEFAULT PASSWORD?</p>
+                    <p>You <span class="strong">CANNOT UNDO</span> this action.</p>
+                    <p>The Default Password is <span class="strong amber-text">STIDipolog</span></p>
+                    <input type="hidden" name="id" value="<?=$this->encryption->encrypt($info['username'])?>" />
+                  </div>
+                  <div class="modal-footer grey darken-4">
+                    <a href="#" class="waves-effect waves-green btn-flat amber-text strong modal-action modal-close">Cancel</a>
+                    <button type="submit" class="waves-effect waves-green btn green modal-action">Reset</button>
+                  </div>
+              <?=form_close()?>
+            </div>
 
 
            <!-- end Modals -->
