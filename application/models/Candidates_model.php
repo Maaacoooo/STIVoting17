@@ -311,13 +311,10 @@ Class Candidates_model extends CI_Model
                     $data['candidates'] = $candid_arr;
                 }  
                     $candid_arr = array(); //resets array
-                
-
 
                 //build the overall array
                 $dataset[] = $data;
-                
-               
+
             }           
 
             return $dataset;
