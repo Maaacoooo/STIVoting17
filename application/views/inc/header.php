@@ -30,7 +30,7 @@
         <div class="navbar-fixed">
             <nav class="indigo darken-3 border-bottom-sti">
                 <div class="nav-wrapper">
-                    <h1 class="logo-wrapper"><a href="<?php echo base_url(); ?>" class="brand-logo darken-1"><img src="<?=base_url('assets/images/sti_header.png')?>" ></a> <span class="logo-text"><?=$site_title?></span></h1>
+                    <h1 class="logo-wrapper"><a href="<?php echo base_url('sys'); ?>" class="brand-logo darken-1"><img src="<?=base_url('assets/images/sti_header.png')?>" ></a> <span class="logo-text"><?=$site_title?></span></h1>
                     <ul class="right hide-on-med-and-down">
                         <li class="search-out">
                             <?=form_open('alumni/search')?>
