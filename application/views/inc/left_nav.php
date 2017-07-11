@@ -56,21 +56,8 @@
               <li class="bold"><a href="<?=base_url('dashboard')?>" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a></li>             
               <?php if($user['usertype'] == 'Administrator'): ?>     
               <li class="li-hover"><div class="divider"></div></li>
-              <li class="li-hover"><p class="ultra-small margin more-text">ADMIN OPTIONS</p></li>  
-              <li class="no-padding">
-                  <ul class="collapsible collapsible-accordion">
-                      <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-child"></i> System Users</a>
-                          <div class="collapsible-body">
-                              <ul>
-                                  <li><a href="<?=base_url('sys/users/create')?>">Register Users</a>
-                                  </li>                                       
-                                  <li><a href="<?=base_url('sys/users')?>">User List</a>
-                                  </li>                                
-                              </ul>
-                          </div>
-                      </li>
-                    </ul>
-              </li>            
+              <li class="li-hover"><p class="ultra-small margin more-text">ADMIN OPTIONS</p></li>       
+              <li class="bold"><a href="<?=base_url('sys/users/')?>" class="waves-effect waves-cyan"><i class="mdi-action-account-child"></i> System Users</a></li>       
               <?php endif; ?> 
 
               <li class="li-hover"><div class="divider"></div></li>
