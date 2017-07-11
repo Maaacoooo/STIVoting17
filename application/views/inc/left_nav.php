@@ -42,7 +42,7 @@
                       </div>
                       <div class="col col s8 m8 l8">
                           <ul id="profile-dropdown" class="dropdown-content">                    
-                              <li><a href="<?=base_url('settings')?>"><i class="mdi-action-settings"></i>Profile</a>
+                              <li><a href="<?=base_url('sys/settings/profile')?>"><i class="mdi-action-settings"></i>Profile</a>
                               </li>                              
                               <li class="divider"></li>                              
                               <li><a href="<?=base_url('sys/dashboard/logout')?>"><i class="mdi-hardware-keyboard-tab"></i>Logout</a>
@@ -62,9 +62,9 @@
                       <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-child"></i> System Users</a>
                           <div class="collapsible-body">
                               <ul>
-                                  <li><a href="<?=base_url('users/create')?>">Register Users</a>
+                                  <li><a href="<?=base_url('sys/users/create')?>">Register Users</a>
                                   </li>                                       
-                                  <li><a href="<?=base_url('users')?>">User List</a>
+                                  <li><a href="<?=base_url('sys/users')?>">User List</a>
                                   </li>                                
                               </ul>
                           </div>
@@ -74,19 +74,8 @@
               <?php endif; ?> 
 
               <li class="li-hover"><div class="divider"></div></li>
-              <li class="li-hover"><p class="ultra-small margin more-text">VOTING SYSTEM OPTIONS</p></li>  
-              <li class="no-padding">
-                  <ul class="collapsible collapsible-accordion">
-                      <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-social-school"></i> Candidates</a>
-                          <div class="collapsible-body">
-                              <ul>
-                                  <li><a href="<?=base_url('sys/candidates/')?>">Candidate List</a></li>                      
-                                  <li><a href="<?=base_url('sys/candidates/partylists')?>">Party List</a></li>                  
-                              </ul>
-                          </div>
-                      </li>
-                    </ul>
-              </li>        
+              <li class="li-hover"><p class="ultra-small margin more-text">VOTING SYSTEM OPTIONS</p></li>
+              <li class="bold"><a href="<?=base_url('sys/candidates/')?>" class="waves-effect waves-cyan"><i class="mdi-social-school"></i> Candidates</a></li>       
               <li class="bold"><a href="<?=base_url('sys/voting/voting_passes/')?>" class="waves-effect waves-cyan"><i class="mdi-communication-vpn-key"></i> Voting Passes</a></li> 
               <li class="bold"><a href="<?=base_url('sys/voting/results/')?>" class="waves-effect waves-cyan"><i class="mdi-editor-insert-chart"></i> Voting Results</a></li> 
               <li class="no-padding">

@@ -236,14 +236,74 @@
                        </div><!-- /.row -->
                        <div class="row">
                           <div class="input-field col s12">
-                                  <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
-                                    <i class="mdi-content-send right"></i>
-                                  </button>
-                                </div>
+                              <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                                <i class="mdi-content-send right"></i>
+                              </button>
+                           </div>
                        </div><!-- /.row -->
+
+                       <input type="hidden" name="key" value="<?=$this->encryption->encrypt('candidate')?>" />
                      <?=form_close()?>
                    </div><!-- /.card-content -->
                  </div><!-- /.card-panel -->
+
+
+                 <div class="card-panel">
+                   <div class="card-content">
+                     <h6 class="strong">
+                       Partylists
+                     </h6><!-- /.strong -->
+                     <?=form_open('sys/candidates')?>
+                     <div class="row">
+                       <div class="col s5 input-field">
+                         <input type="text" name="title" id="title" class="validate" placeholder="Create New Partylist..." required />
+                         <label for="title">New Partylist</label>                      
+                       </div><!-- /.col s5 input-field -->
+                       <div class="input-field col s4">
+                           <div class="select-wrapper">  
+                              <select name="color" class="browser-default" required>
+                                  <option value="" disabled="" selected="">Desired Color...</option>                              
+                                  <option value="pink">Pink</option>                                  
+                                  <option value="red">Red</option>                                  
+                                  <option value="green">Green</option>                                  
+                                  <option value="blue">Blue</option>                                  
+                                  <option value="black">Black</option>                                  
+                                  <option value="orange">Orange</option>                                  
+                                  <option value="amber">Amber</option>                                  
+                                  <option value="purle">Purple</option>                                  
+                                  <option value="cyan">Cyan</option>                                  
+                              </select>
+                            </div><!-- /.select-wrapper -->
+                            <label>Color</label>
+                         </div><!-- /.input-field col s6 --> 
+                         <div class="input-field col s3">
+                           <button class="btn cyan waves-effect waves-light right" type="submit" name="action">SAVE
+                                <i class="mdi-content-send right"></i>
+                           </button>
+                         </div><!-- /.input-field col s3 -->             
+                     </div><!-- /.row -->
+                       <input type="hidden" name="key" value="<?=$this->encryption->encrypt('partylist')?>" />                     
+                     <?=form_close()?>
+                     <div class="divider"></div><!-- /.divider -->
+
+                     <table class="bordered striped">
+                       <tbody>
+                         <?php if($party):
+                         foreach ($party as $par): ?>
+                         <tr>
+                           <td>
+                              <a href="#"><?=$par['title']?></a> 
+                              <span class="badge-label <?=$par['color']?>"><?=strtoupper($par['color'])?></span>
+                            </td>                          
+                         </tr>
+                         <?php endforeach;
+                         endif; ?>
+                       </tbody>
+                     </table><!-- /.bordered striped -->
+
+                   </div><!-- /.card-content -->
+                 </div><!-- /.card-panel -->
+
                </div><!-- /.col s12 l5 -->
              </div><!-- /.row -->
            </div><!-- /.section --> 

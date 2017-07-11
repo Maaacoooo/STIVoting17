@@ -77,8 +77,9 @@ Class Candidates_model extends CI_Model
 
         $filename = $this->read_candidate($id)['img'];
 
-        if($filename) {
-            unlink('./uploads/'.$filename); // Deletes the uploaded image if exist
+        //Deletes the old photo
+        if(!filexist($filename)) {
+          unlink('./uploads/'.$filename); 
         }
 
         return $this->db->delete('candidate', array('id' => $id)); 
@@ -96,9 +97,13 @@ Class Candidates_model extends CI_Model
             $filename = $this->read_candidate($id)['img']; //gets the old data 
 
             //Process Image Upload
-              if($_FILES['img']['name'] != NULL)  {        
+              if($_FILES['img']['name'] != NULL)  { 
 
-                unlink('./uploads/'.$filename); //Deletes the old photo
+
+                //Deletes the old photo
+                if(!filexist($filename)) {
+                  unlink('./uploads/'.$filename); 
+                }
 
                 $config['upload_path'] = './uploads/';
                 $config['allowed_types'] = 'gif|jpg|png'; 
@@ -316,6 +321,25 @@ Class Candidates_model extends CI_Model
             }           
 
             return $dataset;
+
+    }
+
+
+
+    /**
+     * Saves a partylist record
+     * @return boolean    returns TRUE if success
+     */
+    function create_partylist() { 
+
+      
+            $data = array(              
+                'title'  => $this->input->post('title'),  
+                'color'  => $this->input->post('color')            
+             );
+       
+            return $this->db->insert('party', $data);         
+            
 
     }
 

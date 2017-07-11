@@ -79,29 +79,52 @@ class Candidates extends CI_Controller {
 		    $data['total_result'] = $config["total_rows"];
 		    //END PAGINATION
 
-			//Form Validation for Modal
-			$this->form_validation->set_rules('name', 'Name', 'trim|required'); 
-			$this->form_validation->set_rules('party', 'Partylist', 'trim|required'); 
-			$this->form_validation->set_rules('course', 'Courses', 'trim|required'); 
-			$this->form_validation->set_rules('year', 'Year', 'trim|required'); 
+		    //the action key
+		    $key = $this->encryption->decrypt($this->input->post('key'));
+
+			if($key == 'candidate') {
+				//Form Validation for candidate
+				$this->form_validation->set_rules('name', 'Name', 'trim|required'); 
+				$this->form_validation->set_rules('party', 'Partylist', 'trim|required'); 
+				$this->form_validation->set_rules('course', 'Courses', 'trim|required'); 
+				$this->form_validation->set_rules('year', 'Year', 'trim|required'); 
+			} elseif($key == 'partylist') {
+				//Form Validation for partylist
+				$this->form_validation->set_rules('title', 'Title', 'trim|required'); 
+				$this->form_validation->set_rules('color', 'color', 'trim|required'); 
+			}
 
 			if($this->form_validation->run() == FALSE)	{
 				$this->load->view('admin/voting/candidate/list', $data);
-			} else {			
+			} else {		
 
-				//Proceed saving 				
-				if($this->candidates_model->create_candidate()) {			
-			
-					$this->session->set_flashdata('success', 'Succes! Candidate registered!');
-					redirect($_SERVER['HTTP_REFERER'], 'refresh');
-				} else {
-					//failure
-					$this->session->set_flashdata('error', 'Oops! Error occured!');
-					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+				if($key == 'candidate') {
+					//Proceed saving candidate				
+					if($this->candidates_model->create_candidate()) {			
+				
+						$this->session->set_flashdata('success', 'Succes! Candidate registered!');
+						redirect($_SERVER['HTTP_REFERER'], 'refresh');
+					} else {
+						//failure
+						$this->session->set_flashdata('error', 'Oops! Error occured!');
+						redirect($_SERVER['HTTP_REFERER'], 'refresh');
+					}
+
+				} elseif($key == 'partylist') {
+					//Proceed saving partylist				
+					if($this->candidates_model->create_partylist()) {			
+				
+						$this->session->set_flashdata('success', 'Succes! Partylist registered!');
+						redirect($_SERVER['HTTP_REFERER'], 'refresh');
+					} else {
+						//failure
+						$this->session->set_flashdata('error', 'Oops! Error occured!');
+						redirect($_SERVER['HTTP_REFERER'], 'refresh');
+					}
+
 				}
 				
 			}
-
 
 		} else {
 
@@ -133,35 +156,33 @@ class Candidates extends CI_Controller {
 			 //IF NO ID OR NO RESULT, REDIRECT
 				if(!$id OR !$data['info']) {
 					redirect('sys/candidates', 'refresh');
-			}
+			}	
 
-			//Form Validation for Modal
+			//Form Validation for candidate
 			$this->form_validation->set_rules('name', 'Name', 'trim|required'); 
 			$this->form_validation->set_rules('party', 'Partylist', 'trim|required'); 
 			$this->form_validation->set_rules('course', 'Courses', 'trim|required'); 
 			$this->form_validation->set_rules('year', 'Year', 'trim|required'); 
 			$this->form_validation->set_rules('id', 'ID', 'trim|required'); 
+		
 
 			if($this->form_validation->run() == FALSE)	{
 				$this->load->view('admin/voting/candidate/update', $data);
 			} else {			
 
-				//Proceed saving 				
+				//Proceed saving candidate				
 				$key_id = $this->encryption->decrypt($this->input->post('id')); //ID of the row
 				if($this->candidates_model->update_candidate($key_id)) {			
-			
+				
 					$this->session->set_flashdata('success', 'Succes! Candidate Updated!');
 					redirect($_SERVER['HTTP_REFERER'], 'refresh');
 				} else {
 					//failure
 					$this->session->set_flashdata('error', 'Oops! Error occured!');
 					redirect($_SERVER['HTTP_REFERER'], 'refresh');
-				}
+				}			
 				
-			}
-
-
-			
+			}			
 
 		} else {
 
