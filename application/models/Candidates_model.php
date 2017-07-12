@@ -340,6 +340,36 @@ Class Candidates_model extends CI_Model
 
     }
 
+    /**
+     * Deletes a candidate record
+     * @param  int       $title    the DECODED title.   
+     * @return boolean             returns TRUE if success
+     */
+    function delete_party($title) {
+
+        return $this->db->delete('party', array('title' => $title)); 
+
+    }
+
+
+    /**
+     * Updates a party record
+     * @param  String     $title   the DECODED title
+     * @return boolean             returns TRUE if success
+     */
+    function update_party($title) { 
+
+      
+            $data = array(              
+                'title'  => $this->input->post('title'),  
+                'color'  => $this->input->post('color')            
+             );
+            
+            $this->db->where('title', $title);  
+            return $this->db->update('party', $data);         
+            
+
+    }
 
 
 

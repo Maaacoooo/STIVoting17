@@ -46,7 +46,6 @@ class Candidates extends CI_Controller {
 			$data['site_title'] = APP_NAME;
 			$data['user'] 		= $this->user_model->userdetails($userdata['username']); //fetches users record
 
-
 			//Page Data 
 			$data['years']		= $this->candidates_model->years();
 			$data['courses']	= $this->candidates_model->courses();
@@ -150,7 +149,7 @@ class Candidates extends CI_Controller {
 			$data['party']		= $this->candidates_model->party();
 			$data['positions']	= $this->candidates_model->positions();
 
-			$data['info']		= $this->candidates_model->read_candidate($id);
+			$data['info']		= $this->candidates_model->read_candidate($id);		
 
 			//Validate if record exist
 			 //IF NO ID OR NO RESULT, REDIRECT
@@ -213,6 +212,72 @@ class Candidates extends CI_Controller {
 
 				if($this->candidates_model->delete_candidate($key_id)) {
 					$this->session->set_flashdata('success', 'Deleted!');
+					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+				}
+			}
+
+		} else {
+
+			$this->session->set_flashdata('error', 'You need to login!');
+			redirect('sys/dashboard/login', 'refresh');
+		}
+
+	}
+
+
+	public function delete_party()		{
+
+		$userdata = $this->session->userdata('admin_logged_in'); //it's pretty clear it's a userdata
+
+		if($userdata)	{
+
+			//FORM VALIDATION
+			$this->form_validation->set_rules('id', 'ID', 'trim|required');   
+		 
+		   if($this->form_validation->run() == FALSE)	{
+
+				$this->session->set_flashdata('error', 'An Error has Occured!');
+				redirect($_SERVER['HTTP_REFERER'], 'refresh');
+
+			} else {
+
+				$key_id = $this->encryption->decrypt($this->input->post('id')); //ID of the row				
+
+				if($this->candidates_model->delete_party($key_id)) {
+					$this->session->set_flashdata('success', 'Deleted!');
+					redirect($_SERVER['HTTP_REFERER'], 'refresh');
+				}
+			}
+
+		} else {
+
+			$this->session->set_flashdata('error', 'You need to login!');
+			redirect('sys/dashboard/login', 'refresh');
+		}
+
+	}
+
+
+	public function update_party()		{
+
+		$userdata = $this->session->userdata('admin_logged_in'); //it's pretty clear it's a userdata
+
+		if($userdata)	{
+
+			//FORM VALIDATION
+			$this->form_validation->set_rules('id', 'ID', 'trim|required');   
+		 
+		   if($this->form_validation->run() == FALSE)	{
+
+				$this->session->set_flashdata('error', 'An Error has Occured!');
+				redirect($_SERVER['HTTP_REFERER'], 'refresh');
+
+			} else {
+
+				$key_id = $this->encryption->decrypt($this->input->post('id')); //ID of the row				
+
+				if($this->candidates_model->update_party($key_id)) {
+					$this->session->set_flashdata('success', 'Party Updated!');
 					redirect($_SERVER['HTTP_REFERER'], 'refresh');
 				}
 			}

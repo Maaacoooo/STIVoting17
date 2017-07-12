@@ -270,12 +270,12 @@
                                   <option value="black">Black</option>                                  
                                   <option value="orange">Orange</option>                                  
                                   <option value="amber">Amber</option>                                  
-                                  <option value="purle">Purple</option>                                  
+                                  <option value="purple">Purple</option>                                  
                                   <option value="cyan">Cyan</option>                                  
                               </select>
                             </div><!-- /.select-wrapper -->
                             <label>Color</label>
-                         </div><!-- /.input-field col s6 --> 
+                         </div><!-- /.input-field col s4 --> 
                          <div class="input-field col s3">
                            <button class="btn cyan waves-effect waves-light right" type="submit" name="action">SAVE
                                 <i class="mdi-content-send right"></i>
@@ -294,15 +294,73 @@
                            <td>
                               <a href="#"><?=$par['title']?></a> 
                               <span class="badge-label <?=$par['color']?>"><?=strtoupper($par['color'])?></span>
-                            </td>                          
+                            </td> 
+                            <td>
+                              <a href="#Update<?=safelink($par['title'])?>" class="modal-trigger amber-text">[<i class="mdi-editor-mode-edit tiny"></i>]</a>
+                              <a href="#Delete<?=safelink($par['title'])?>" class="modal-trigger red-text">[<i class="mdi-action-delete tiny"></i>]</a>
+                            </td>                         
                          </tr>
                          <?php endforeach;
                          endif; ?>
                        </tbody>
                      </table><!-- /.bordered striped -->
-
                    </div><!-- /.card-content -->
                  </div><!-- /.card-panel -->
+
+                 <!-- Modals -->
+                 <?php if($party):
+                  foreach ($party as $par): ?>
+                 <div id="Delete<?=safelink($par['title'])?>" class="modal">
+                    <?=form_open('sys/candidates/delete_party')?>
+                      <div class="modal-content red darken-4 white-text">
+                          <p>Are you sure to delete the partylist <span class="strong"><?=$par['title']?></span>?</p>
+                          <p>Deleting this party will <span class="strong">DELETE ALL Candidates</span> within this party.</p>
+                          <p>You <span class="strong">CANNOT UNDO</span> this action.</p>
+                          <input type="hidden" name="id" value="<?=$this->encryption->encrypt($par['title'])?>" />
+                        </div>
+                        <div class="modal-footer grey darken-4">
+                          <a href="#" class="waves-effect waves-red btn-flat amber-text strong modal-action modal-close">Cancel</a>
+                          <button type="submit" class="waves-effect waves-red btn red modal-action">Delete</button>
+                        </div>
+                    <?=form_close()?>
+                  </div>
+
+                  <div id="Update<?=safelink($par['title'])?>" class="modal">
+                    <?=form_open('sys/candidates/update_party')?>
+                      <div class="modal-content grey darken-4 white-text">
+                          <p>Please update the party accordingly.</p>
+                          <div class="row">
+                            <div class="input-field col s8">
+                              <input type="text" name="title" id="" class="validate" value="<?=$par['title']?>" />
+                              <label for="">Partylist</label>
+                            </div><!-- /.input-field col s8 -->
+                            <div class="input-field col s4">
+                               <div class="select-wrapper">  
+                                  <select name="color" class="browser-default black-text" required>
+                                      <option value="pink" <?php if($par['color'] == 'pink')echo'selected';?>>Pink</option>                                  
+                                      <option value="red" <?php if($par['color'] == 'red')echo'selected';?>>Red</option>                                  
+                                      <option value="green" <?php if($par['color'] == 'green')echo'selected';?>>Green</option>                                  
+                                      <option value="blue" <?php if($par['color'] == 'blue')echo'selected';?>>Blue</option>                                  
+                                      <option value="black" <?php if($par['color'] == 'black')echo'selected';?>>Black</option>                                  
+                                      <option value="orange" <?php if($par['color'] == 'orange')echo'selected';?>>Orange</option>                                  
+                                      <option value="amber" <?php if($par['color'] == 'amber')echo'selected';?>>Amber</option>                                  
+                                      <option value="purple" <?php if($par['color'] == 'purple')echo'selected';?>>Purple</option>                                  
+                                      <option value="cyan" <?php if($par['color'] == 'cyan')echo'selected';?>>Cyan</option>                                  
+                                  </select>
+                                </div><!-- /.select-wrapper -->
+                                <label>Color</label>
+                             </div><!-- /.input-field col s6 --> 
+                          </div><!-- /.row -->
+                          <input type="hidden" name="id" value="<?=$this->encryption->encrypt($par['title'])?>" />
+                        </div>
+                        <div class="modal-footer black">
+                          <a href="#" class="waves-effect waves-amber btn-flat red-text strong modal-action modal-close">Cancel</a>
+                          <button type="submit" class="waves-effect waves-amber btn amber modal-action">Update</button>
+                        </div>
+                    <?=form_close()?>
+                  </div>
+                  <?php endforeach;
+                   endif; ?>
 
                </div><!-- /.col s12 l5 -->
              </div><!-- /.row -->
