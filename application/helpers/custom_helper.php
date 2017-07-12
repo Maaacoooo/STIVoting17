@@ -37,6 +37,11 @@
     }
 
 
+    function safelink($str) {
+       return preg_replace("/[^a-zA-Z]/", "", $str);
+    }
+
+
   
 
 
