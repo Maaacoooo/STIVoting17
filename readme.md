@@ -1,5 +1,5 @@
-![ssc1.png](https://bitbucket.org/repo/9p89LRy/images/692009344-ssc1.png)
-![ssc2.png](https://bitbucket.org/repo/9p89LRy/images/3085591602-ssc2.png)
+![ssc1](https://user-images.githubusercontent.com/18521782/28152219-f2aeef2e-67d1-11e7-8e32-915d546556f8.png)
+![ssc2](https://user-images.githubusercontent.com/18521782/28152218-f2aad588-67d1-11e7-9d65-9639a2706ef6.png)
 
 # Your STI Voting System Module #
 
@@ -65,6 +65,6 @@ issues, as well as missing features.
 
 [Codeigniter](http://codeigniter.com/)
 
-![sti_dipolog_75.png](https://bitbucket.org/repo/9p89LRy/images/892191762-sti_dipolog_75.png) 
+![sti_dipolog_75](https://user-images.githubusercontent.com/18521782/28152212-e2835e50-67d1-11e7-9bff-c93379b6cfe3.png)
 
-![tdp_h75.png](https://bitbucket.org/repo/9p89LRy/images/4249224223-tdp_h75.png)
+![tdp_h75](https://user-images.githubusercontent.com/18521782/28152226-fb9ba866-67d1-11e7-8015-1f8a9845f132.png)
