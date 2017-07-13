@@ -1,3 +1,5 @@
+![sti_dipolog.png](https://bitbucket.org/repo/9p89LRy/images/3368578090-sti_dipolog.png)
+
 ###################
 STI Voting System Module
 ###################
