@@ -53,7 +53,7 @@
                       </div>
                   </div>
               </li>
-              <li class="bold"><a href="<?=base_url('dashboard')?>" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a></li>             
+              <li class="bold"><a href="<?=base_url('sys/dashboard')?>" class="waves-effect waves-cyan"><i class="mdi-action-dashboard"></i> Dashboard</a></li>             
               <?php if($user['usertype'] == 'Administrator'): ?>     
               <li class="li-hover"><div class="divider"></div></li>
               <li class="li-hover"><p class="ultra-small margin more-text">ADMIN OPTIONS</p></li>       
